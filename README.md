@@ -79,9 +79,9 @@ midterm-data-pipeline/
 │   ├── orders_huge_mixed_quality.csv   # Target dataset (30M records ~12.65 GB)
 │   └── orders_sample.csv               # Development & test sample file
 ├── reports/
-│   ├── screenshots/             # Proof screenshots (Spark UI, Compass, Tests)
 │   ├── results.json             # Cumulative execution performance logs
 │   └── results.md               # Formatted audit report
+├── screenshots/                 # Proof screenshots (Spark UI, Compass, Tests)
 ├── src/
 │   ├── file_router.py           # Auto-routes workloads by file size
 │   ├── spark_loader.py          # Distributed Raw Ingestion engine
