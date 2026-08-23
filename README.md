@@ -238,8 +238,10 @@ IDEMPOTENCY TEST PASSED: 0 DUPLICATES CREATED, 1 RECORD UPDATED IN-PLACE!
 }
 ```
 
----
+---## 👥 Contributors & Academic Integrity 🎓
 
-## 👥 Contributors & Academic Integrity 🎓
-* Developed for the **Midterm Data Engineering Big Data Processing Course**.
-* Implemented in full accordance with course specifications and validation guidelines.
+* **Developer & Pipeline Engineer:** **Nader Alshawki** ([@Nader_al_shawki](https://github.com/Naderalshawki))
+* **Course:** Midterm Data Engineering & Big Data Processing
+* **Academic Year:** 2026
+* **Institution:** Faculty of Computer Science & Information Technology
+* **Integrity Statement:** Implemented in full accordance with course specifications, distributed computing standards, and data quality validation guidelines.
