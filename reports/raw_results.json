@@ -1,0 +1,11 @@
+{
+    "run_id": "23503a6a-f0f1-4a2e-bb3a-e40473dec273",
+    "engine_used": "pyspark",
+    "stage": "raw_ingestion_only",
+    "file_name": "orders_huge_mixed_quality.csv",
+    "file_size_mb": 12650.32,
+    "raw_loaded": 30000000,
+    "input_partitions": 1,
+    "elapsed_seconds": 3310.683,
+    "throughput_rows_per_sec": 9061.58
+}
