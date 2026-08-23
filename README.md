@@ -237,11 +237,10 @@ IDEMPOTENCY TEST PASSED: 0 DUPLICATES CREATED, 1 RECORD UPDATED IN-PLACE!
   "last_updated_at": "2026-08-23T14:40:00Z"
 }
 ```
+## 👥 Contributors & Academic Integrity 🎓
 
----## 👥 Contributors & Academic Integrity 🎓
-
-* **Developer & Pipeline Engineer:** **Nader Alshawki** ([@Nader_al_shawki](https://github.com/Naderalshawki))
-* **Course:** Midterm Data Engineering & Big Data Processing
-* **Academic Year:** 2026
-* **Institution:** Faculty of Computer Science & Information Technology
-* **Integrity Statement:** Implemented in full accordance with course specifications, distributed computing standards, and data quality validation guidelines.
+* 👨‍💻 **Lead Data Engineer & Architect:** **Nader Al shawki** ([@Naderalshawki](https://github.com/Naderalshawki)) 🚀⚡
+* 📚 **Course & Specialization:** Midterm Big Data Engineering & Distributed Systems 🏛️🔬
+* 📅 **Academic Year:** 2026 🎯
+* 🏛️ **Institution:** Faculty of Computer Science & Information Technology 🎓💡
+* 🛡️ **Integrity & Engineering Rigor:** Built with end-to-end distributed pipelines, 100% mathematical consistency verification, and zero duplicate tolerance. 🏆💪🔥
