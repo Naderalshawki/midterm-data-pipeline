@@ -368,5 +368,29 @@
         "error_case_counts": {},
         "elapsed_seconds": 0.27,
         "throughput_rows_per_sec": 37.04
+    },
+    {
+        "run_id": "a60762d4-8a9c-4d30-a62f-5643391dfda6",
+        "engine_used": "python_batch",
+        "stage": "quality_validation_and_idempotent_upsert",
+        "rows_read": 100000,
+        "raw_loaded": 100000,
+        "valid_count": 85926,
+        "corrected_count": 9866,
+        "quarantine_count": 4208,
+        "consistency_equation_passed": true,
+        "inserted_count": 0,
+        "updated_count": 95350,
+        "unchanged_count": 0,
+        "error_case_counts": {
+            "MISSING_CUSTOMER_ID": 1411,
+            "CORRUPTED_ITEMS_JSON": 674,
+            "AMBIGUOUS_NEGATIVE_VALUE": 677,
+            "MISSING_ORDER_ID": 721,
+            "EMPTY_ITEMS": 677,
+            "INVALID_IMPOSSIBLE_DATE": 722
+        },
+        "elapsed_seconds": 113.596,
+        "throughput_rows_per_sec": 880.31
     }
 ]
