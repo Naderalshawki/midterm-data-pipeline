@@ -1,15 +1,18 @@
 """
-Hybrid ELT Data Pipeline & Phase 2 Analytics - Single Master Entrypoint
-=======================================================================
+Hybrid ELT Data Pipeline & Phase 2 Analytics - Ultimate One-Click Master Entrypoint
+===================================================================================
 One-click execution running:
-- Phase 1 (Midterm 18G): File Router -> Raw Ingestion -> 8 Quality Rules -> Quarantine & Idempotent Upsert
-- Phase 2 (Final 7G)   : 3 Indexes & Explain -> 5 Queries -> 5 Aggregations -> 2 Incremental MVs -> 2 Scheduled Jobs
+1. Phase 1 (Midterm 18G): File Router -> Raw Ingestion -> 8 Quality Rules -> Quarantine & Upsert
+2. Phase 2 (Final 7G)   : 3 Indexes & Explain -> 5 Queries -> 5 Aggregations -> 2 Incremental MVs -> 2 Jobs
+3. Unified Web Server   : Auto-starts FastAPI Server & prints/opens http://localhost:8000 & /docs
 """
 import os
 import sys
+import threading
+import webbrowser
 from pathlib import Path
 
-# ضبط مسار المشروع تلقائياً ليعمل زر Run في VS Code من أي مكان
+# ضبط مسار المشروع تلقائياً ليعمل زر Run في VS Code أو الطرفية من أي مكان
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = CURRENT_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
@@ -78,8 +81,7 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
     for comp in explain_report["explain_comparisons"]:
         print(f" [Explain] {comp['query_name']}: {comp['impact_summary']}")
 
-    queries = list_available_queries()
-    for q in queries:
+    for q in list_available_queries():
         q_res = execute_named_query(q["name"], limit=5)
         print(f" [Query OK] {q['name']} -> Returned {q_res['count_returned']} records")
 
@@ -120,18 +122,18 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
     print(f" [Job 2 OK] {job2['job_name']} -> Status: {job2['status']} ({job2['duration_seconds']}s)")
 
     print("\n" + "=" * 85)
-    print("✅ ALL PHASE 1 & PHASE 2 STAGES COMPLETED SUCCESSFULLY (100% READY)!")
-    print("🌐 To open Web Dashboard & Swagger UI (/docs), run: python -m src.api")
-    print("🖥️ To open Interactive Terminal Menu, run         : python -m src.cli_launcher")
-    print("=" * 85 + "\n")
+    print("✅ ALL PHASE 1 & PHASE 2 PIPELINE STAGES COMPLETED SUCCESSFULLY!")
+    print("=" * 85)
 
     return run_id
 
 
 def main():
-    # الأولوية: 1. ملف ممرر من الطرفية | 2. ملف العينة السريع | 3. ملف الإدخال العام
-    if len(sys.argv) > 1:
-        target_file = sys.argv[1]
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    no_server = "--no-server" in sys.argv
+
+    if args:
+        target_file = args[0]
     elif SAMPLE_FILE.exists():
         target_file = str(SAMPLE_FILE)
     elif INPUT_FILE.exists():
@@ -139,7 +141,33 @@ def main():
     else:
         target_file = "data/orders_sample.csv"
 
+    # 1. تشغيل المراحل الـ 6 كاملة (النصفي + النهائي)
     execute_pipeline(target_file, run_phase2=True)
+
+    if no_server:
+        return
+
+    # 2. تشغيل سيرفر FastAPI الموحد وطباعة الروابط المباشرة وفتح المتصفح تلقائياً
+    port = int(os.getenv("API_PORT", 8000))
+    dashboard_url = f"http://localhost:{port}/"
+    swagger_url = f"http://localhost:{port}/docs"
+    health_url = f"http://localhost:{port}/health"
+
+    print("\n" + "╔" + "═" * 83 + "╗")
+    print("║ 🌐 UNIFIED FASTAPI SERVER & WEB COMMAND STUDIO IS STARTING NOW...                 ║")
+    print("╠" + "═" * 83 + "╣")
+    print(f"║ 🚀 Web Command Studio (Dashboard) : {dashboard_url:<46}║")
+    print(f"║ 📘 Official Swagger UI (/docs)    : {swagger_url:<46}║")
+    print(f"║ ❤️ System Health Check (/health)  : {health_url:<46}║")
+    print("║ 💡 اضغط Ctrl + Click على أي رابط أعلاه (أو سيفتح المتصفح تلقائياً الآن)           ║")
+    print("║ 🛑 لإيقاف السيرفر في أي وقت اضغط : Ctrl + C                                       ║")
+    print("╚" + "═" * 83 + "╝\n")
+
+    # فتح المتصفح تلقائياً بعد ثانية ونصف من بدء السيرفر
+    threading.Timer(1.5, lambda: webbrowser.open(dashboard_url)).start()
+
+    import uvicorn
+    uvicorn.run("src.api:app", host="0.0.0.0", port=port, reload=False)
 
 
 if __name__ == "__main__":

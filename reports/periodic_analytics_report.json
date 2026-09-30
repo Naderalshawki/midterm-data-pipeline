@@ -1,116 +1,116 @@
 {
-  "generated_at": "2026-09-30T22:53:14.915661+00:00",
+  "generated_at": "2026-09-30T23:18:05.326390+00:00",
   "top_cities_by_sales": [
     {
-      "total_orders": 9599,
+      "total_orders": 5216,
       "city": "عدن",
-      "total_revenue": 2542540500.0,
-      "avg_order_value": 264875.56,
-      "total_delivery_cost": 33499000.0
+      "total_revenue": 1392661500.0,
+      "avg_order_value": 266997.99,
+      "total_delivery_cost": 18127000.0
     },
     {
-      "total_orders": 9613,
+      "total_orders": 5244,
+      "city": "تعز",
+      "total_revenue": 1363504500.0,
+      "avg_order_value": 260012.3,
+      "total_delivery_cost": 18582000.0
+    },
+    {
+      "total_orders": 5207,
       "city": "لحج",
-      "total_revenue": 2490809000.0,
-      "avg_order_value": 259108.39,
-      "total_delivery_cost": 33611000.0
+      "total_revenue": 1338094000.0,
+      "avg_order_value": 256979.83,
+      "total_delivery_cost": 18151000.0
     },
     {
-      "total_orders": 9479,
+      "total_orders": 5203,
       "city": "الحديدة",
-      "total_revenue": 2473901000.0,
-      "avg_order_value": 260987.55,
-      "total_delivery_cost": 33217000.0
+      "total_revenue": 1337617500.0,
+      "avg_order_value": 257085.82,
+      "total_delivery_cost": 18326000.0
     },
     {
-      "total_orders": 9644,
-      "city": "ذمار",
-      "total_revenue": 2458999500.0,
-      "avg_order_value": 254977.14,
-      "total_delivery_cost": 33778000.0
-    },
-    {
-      "total_orders": 9436,
+      "total_orders": 5099,
       "city": "المكلا",
-      "total_revenue": 2446592000.0,
-      "avg_order_value": 259282.75,
-      "total_delivery_cost": 32990000.0
+      "total_revenue": 1331625500.0,
+      "avg_order_value": 261154.25,
+      "total_delivery_cost": 17983000.0
     }
   ],
   "orders_by_status": [
     {
-      "orders_count": 15825,
-      "status": "confirmed",
-      "status_revenue": 4053912000.0,
-      "avg_amount": 256171.37
-    },
-    {
-      "orders_count": 15812,
-      "status": "cancelled",
-      "status_revenue": 4092059000.0,
-      "avg_amount": 258794.52
-    },
-    {
-      "orders_count": 15805,
-      "status": "returned",
-      "status_revenue": 4032245500.0,
-      "avg_amount": 255124.68
-    },
-    {
-      "orders_count": 15725,
+      "orders_count": 8601,
       "status": "shipped",
-      "status_revenue": 4074893500.0,
-      "avg_amount": 259134.72
+      "status_revenue": 2241809000.0,
+      "avg_amount": 260645.16
     },
     {
-      "orders_count": 15669,
-      "status": "pending",
-      "status_revenue": 4104392500.0,
-      "avg_amount": 261943.49
+      "orders_count": 8573,
+      "status": "cancelled",
+      "status_revenue": 2224349500.0,
+      "avg_amount": 259459.87
     },
     {
-      "orders_count": 15594,
+      "orders_count": 8533,
       "status": "delivered",
-      "status_revenue": 4027886000.0,
-      "avg_amount": 258297.17
+      "status_revenue": 2224732500.0,
+      "avg_amount": 260721.02
     },
     {
-      "orders_count": 716,
+      "orders_count": 8522,
+      "status": "returned",
+      "status_revenue": 2164013500.0,
+      "avg_amount": 253932.59
+    },
+    {
+      "orders_count": 8503,
+      "status": "confirmed",
+      "status_revenue": 2197804000.0,
+      "avg_amount": 258473.95
+    },
+    {
+      "orders_count": 8463,
+      "status": "pending",
+      "status_revenue": 2198804000.0,
+      "avg_amount": 259813.78
+    },
+    {
+      "orders_count": 363,
       "status": "حالة غير معروفة تمامًا",
-      "status_revenue": 180718000.0,
-      "avg_amount": 252399.44
+      "status_revenue": 90092500.0,
+      "avg_amount": 248188.71
     }
   ],
   "top_selling_products": [
     {
-      "total_quantity_sold": 61304,
-      "order_count": 31025,
+      "total_quantity_sold": 33408,
+      "order_count": 16896,
       "product_name": "SKU-1010",
-      "total_product_revenue": 13433727000.0
+      "total_product_revenue": 7315141500.0
     },
     {
-      "total_quantity_sold": 62315,
-      "order_count": 31446,
+      "total_quantity_sold": 33704,
+      "order_count": 17066,
       "product_name": "SKU-1007",
-      "total_product_revenue": 6817856000.0
+      "total_product_revenue": 3691960000.0
     },
     {
-      "total_quantity_sold": 62752,
-      "order_count": 31549,
+      "total_quantity_sold": 33975,
+      "order_count": 17075,
       "product_name": "SKU-1005",
-      "total_product_revenue": 1787866500.0
+      "total_product_revenue": 968055000.0
     },
     {
-      "total_quantity_sold": 62429,
-      "order_count": 31463,
+      "total_quantity_sold": 33509,
+      "order_count": 16877,
       "product_name": "SKU-1008",
-      "total_product_revenue": 622524000.0
+      "total_product_revenue": 334064000.0
     },
     {
-      "total_quantity_sold": 62286,
-      "order_count": 31412,
+      "total_quantity_sold": 33796,
+      "order_count": 17026,
       "product_name": "SKU-1002",
-      "total_product_revenue": 556168500.0
+      "total_product_revenue": 301325000.0
     }
   ]
 }
