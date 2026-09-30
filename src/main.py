@@ -1,67 +1,145 @@
 """
-Hybrid ELT Data Pipeline - Single Master Entrypoint
-Direct one-click execution supporting automatic routing & database execution.
-Fully compliant with official midterm requirements (Sections 6.2 to 6.11).
+Hybrid ELT Data Pipeline & Phase 2 Analytics - Single Master Entrypoint
+=======================================================================
+One-click execution running:
+- Phase 1 (Midterm 18G): File Router -> Raw Ingestion -> 8 Quality Rules -> Quarantine & Idempotent Upsert
+- Phase 2 (Final 7G)   : 3 Indexes & Explain -> 5 Queries -> 5 Aggregations -> 2 Incremental MVs -> 2 Scheduled Jobs
 """
 import os
 import sys
 from pathlib import Path
 
-# ضبط مسار المشروع تلقائياً ليعمل زر Run من أي مكان
+# ضبط مسار المشروع تلقائياً ليعمل زر Run في VS Code من أي مكان
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = CURRENT_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 os.chdir(PROJECT_ROOT)
 
-from config.settings import INPUT_FILE, SAMPLE_FILE
+from config.settings import SAMPLE_FILE, INPUT_FILE
 from src.file_router import route_file
 from src.batch_loader import run_batch_pipeline
 from src.spark_loader import run_spark_pipeline
 from src.elt_pipeline import run_elt_pipeline
+from src.queries_and_indexes import (
+    create_indexes_and_benchmark_explain,
+    list_available_queries,
+    execute_named_query,
+)
+from src.aggregations import (
+    list_available_aggregations,
+    run_aggregation_report,
+)
+from src.materialized_views import refresh_all_materialized_views
+from src.scheduler import run_job_by_name
 
 
-def execute_pipeline(input_file_path: str):
+def execute_pipeline(input_file_path: str, run_phase2: bool = True):
+    """تشغيل خط البيانات الكامل (المرحلة الأولى + المرحلة الثانية) بضغطة زر واحدة"""
     input_file = Path(input_file_path)
+    if not input_file.is_absolute():
+        input_file = PROJECT_ROOT / input_file
+
     if not input_file.exists():
         print(f"\n[-] خطأ: لم يتم العثور على الملف في المسار: {input_file}")
-        return
+        return None
 
-    print("\n" + "=" * 80)
-    print("STARTING HYBRID DATA PIPELINE (END-TO-END EXECUTION)")
-    print("=" * 80)
+    print("\n" + "=" * 85)
+    print("🚀 STARTING FULL HYBRID DATA PIPELINE (PHASE 1 MIDTERM + PHASE 2 FINAL)")
+    print("=" * 85)
 
-    # 1. المرحلة الأولى: توجيه واختيار المحرك تلقائياً وتحميل البيانات الخام (Sections 6.2 - 6.5)
+    # =========================================================================
+    # PHASE 1 - STAGE 1: Smart File Routing & Raw Ingestion (Sections 6.2 - 6.5)
+    # =========================================================================
     engine = route_file(str(input_file))
-    
     if engine == "python_batch":
         run_id = run_batch_pipeline(str(input_file))
     else:
         run_id = run_spark_pipeline(str(input_file))
 
-    # 2. المرحلة الثانية: التنظيف، العزل، والـ Idempotent Upsert (Sections 6.6 - 6.11)
-    print("\n" + "=" * 80)
-    print("TRIGGERING STAGE 2: ELT CLEANING, VALIDATION & IDEMPOTENT UPSERT")
-    print("=" * 80)
+    # =========================================================================
+    # PHASE 1 - STAGE 2: 8 Cleaning Rules, Quarantine & Idempotent Upsert
+    # =========================================================================
+    print("\n" + "=" * 85)
+    print("🧹 STAGE 2: ELT CLEANING, VALIDATION, QUARANTINE & IDEMPOTENT UPSERT")
+    print("=" * 85)
     run_elt_pipeline(target_run_id=run_id)
 
-    print("\n" + "=" * 80)
-    print("ENTIRE PIPELINE EXECUTION FINISHED SUCCESSFULLY!")
-    print("=" * 80)
+    if not run_phase2:
+        return run_id
+
+    # =========================================================================
+    # PHASE 2 - REQUIREMENT 1: 3 Indexes, Explain Benchmark & 5 Queries
+    # =========================================================================
+    print("\n" + "=" * 85)
+    print("⚡ STAGE 3 (PHASE 2): BUILDING 3 INDEXES, RUNNING EXPLAIN & 5 QUERIES")
+    print("=" * 85)
+    explain_report = create_indexes_and_benchmark_explain()
+    for comp in explain_report["explain_comparisons"]:
+        print(f" [Explain] {comp['query_name']}: {comp['impact_summary']}")
+
+    queries = list_available_queries()
+    for q in queries:
+        q_res = execute_named_query(q["name"], limit=5)
+        print(f" [Query OK] {q['name']} -> Returned {q_res['count_returned']} records")
+
+    # =========================================================================
+    # PHASE 2 - REQUIREMENT 2: 5 MongoDB Aggregation Reports
+    # =========================================================================
+    print("\n" + "=" * 85)
+    print("📊 STAGE 4 (PHASE 2): EXECUTING 5 ANALYTICAL AGGREGATION REPORTS")
+    print("=" * 85)
+    for agg in list_available_aggregations():
+        agg_res = run_aggregation_report(agg["name"], limit=5)
+        print(f" [Aggregation OK] {agg['name']} -> Returned {agg_res['count_returned']} summary rows")
+
+    # =========================================================================
+    # PHASE 2 - REQUIREMENT 3: 2 Materialized Views with Incremental Refresh
+    # =========================================================================
+    print("\n" + "=" * 85)
+    print("🔄 STAGE 5 (PHASE 2): INCREMENTAL REFRESH OF 2 MATERIALIZED VIEWS")
+    print("=" * 85)
+    mv_res = refresh_all_materialized_views(force_full=False)
+    for view_name, view_data in mv_res["views"].items():
+        m = view_data["metrics"]
+        print(
+            f" [Materialized View OK] {view_name} | Mode: {m['refresh_mode']} "
+            f"| Delta Processed: {m['delta_records_processed']} | Total Rows: {m['total_view_documents']}"
+        )
+
+    # =========================================================================
+    # PHASE 2 - REQUIREMENT 4: 2 Scheduled Jobs Execution & Audit Logging
+    # =========================================================================
+    print("\n" + "=" * 85)
+    print("⏱️ STAGE 6 (PHASE 2): RUNNING 2 SCHEDULED JOBS & SAVING AUDIT LOGS")
+    print("=" * 85)
+    job1 = run_job_by_name("refresh_materialized_views_job")
+    print(f" [Job 1 OK] {job1['job_name']} -> Status: {job1['status']} ({job1['duration_seconds']}s)")
+
+    job2 = run_job_by_name("generate_periodic_report_job")
+    print(f" [Job 2 OK] {job2['job_name']} -> Status: {job2['status']} ({job2['duration_seconds']}s)")
+
+    print("\n" + "=" * 85)
+    print("✅ ALL PHASE 1 & PHASE 2 STAGES COMPLETED SUCCESSFULLY (100% READY)!")
+    print("🌐 To open Web Dashboard & Swagger UI (/docs), run: python -m src.api")
+    print("🖥️ To open Interactive Terminal Menu, run         : python -m src.cli_launcher")
+    print("=" * 85 + "\n")
+
+    return run_id
 
 
 def main():
-    # الأولوية: 1. وسيط الطرفية إن وُجد | 2. ملف الـ 30 مليون المعرف في settings.py | 3. ملف العينة
+    # الأولوية: 1. ملف ممرر من الطرفية | 2. ملف العينة السريع | 3. ملف الإدخال العام
     if len(sys.argv) > 1:
         target_file = sys.argv[1]
-    elif INPUT_FILE.exists():
-        target_file = str(INPUT_FILE)
     elif SAMPLE_FILE.exists():
         target_file = str(SAMPLE_FILE)
+    elif INPUT_FILE.exists():
+        target_file = str(INPUT_FILE)
     else:
-        target_file = "data/orders_small_sample.csv"
+        target_file = "data/orders_sample.csv"
 
-    execute_pipeline(target_file)
+    execute_pipeline(target_file, run_phase2=True)
 
 
 if __name__ == "__main__":
