@@ -4,15 +4,17 @@ Hybrid ELT Data Pipeline & Phase 2 Analytics - Ultimate One-Click Master Entrypo
 One-click execution running:
 1. Phase 1 (Midterm 18G): File Router -> Raw Ingestion -> 8 Quality Rules -> Quarantine & Upsert
 2. Phase 2 (Final 7G)   : 3 Indexes & Explain -> 5 Queries -> 5 Aggregations -> 2 Incremental MVs -> 2 Jobs
-3. Unified Web Server   : Auto-starts FastAPI Server & prints/opens http://localhost:8000 & /docs
+3. Live Web Server      : Auto-frees port 8000 if busy, starts FastAPI Server & opens http://localhost:8000
 """
 import os
 import sys
+import socket
+import subprocess
 import threading
 import webbrowser
 from pathlib import Path
 
-# ضبط مسار المشروع تلقائياً ليعمل زر Run في VS Code أو الطرفية من أي مكان
+# ضبط مسار المشروع تلقائياً ليعمل زر Run (▷) في VS Code أو من الطرفية مباشرة
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = CURRENT_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
@@ -37,8 +39,43 @@ from src.materialized_views import refresh_all_materialized_views
 from src.scheduler import run_job_by_name
 
 
+def _ensure_port_available(port: int) -> int:
+    """فحص المنفذ وتحريره تلقائياً إذا كان محجوزاً من عملية سابقة في ويندوز، أو اختيار منفذ بديل"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        if s.connect_ex(("127.0.0.1", port)) != 0:
+            return port  # المنفذ متاح وجاهز
+
+    print(f"[*] المنفذ {port} مشغول بعملية سابقة، جاري تحريره تلقائياً...")
+    if os.name == "nt":
+        try:
+            out = subprocess.check_output(f"netstat -ano | findstr :{port}", shell=True, text=True)
+            pids = set()
+            for line in out.strip().splitlines():
+                parts = line.strip().split()
+                if len(parts) >= 5 and "LISTENING" in line.upper():
+                    pid = parts[-1]
+                    if pid.isdigit() and int(pid) != os.getpid():
+                        pids.add(pid)
+            for pid in pids:
+                subprocess.run(f"taskkill /PID {pid} /F", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except Exception:
+            pass
+
+    # التحقق مرة أخرى بعد التحرير
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        if s.connect_ex(("127.0.0.1", port)) != 0:
+            return port
+
+    # إذا بقي مشغولاً لأي سبب، نختار المنفذ التالي المتاح (مثل 8001) حتى لا يتوقف البرنامج أبداً
+    for alt_port in range(port + 1, port + 20):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if s.connect_ex(("127.0.0.1", alt_port)) != 0:
+                return alt_port
+    return port
+
+
 def execute_pipeline(input_file_path: str, run_phase2: bool = True):
-    """تشغيل خط البيانات الكامل (المرحلة الأولى + المرحلة الثانية) بضغطة زر واحدة"""
+    """تشغيل خط البيانات الكامل (المرحلة الأولى + المرحلة الثانية) بالتتابع"""
     input_file = Path(input_file_path)
     if not input_file.is_absolute():
         input_file = PROJECT_ROOT / input_file
@@ -131,6 +168,7 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     no_server = "--no-server" in sys.argv
+    server_only = "--server-only" in sys.argv
 
     if args:
         target_file = args[0]
@@ -141,14 +179,17 @@ def main():
     else:
         target_file = "data/orders_sample.csv"
 
-    # 1. تشغيل المراحل الـ 6 كاملة (النصفي + النهائي)
-    execute_pipeline(target_file, run_phase2=True)
+    # 1. تشغيل المراحل الـ 6 كاملة (إلا إذا طُلب تشغيل السيرفر فقط عبر --server-only)
+    if not server_only:
+        execute_pipeline(target_file, run_phase2=True)
 
     if no_server:
         return
 
-    # 2. تشغيل سيرفر FastAPI الموحد وطباعة الروابط المباشرة وفتح المتصفح تلقائياً
-    port = int(os.getenv("API_PORT", 8000))
+    # 2. تحرير المنفذ 8000 تلقائياً إذا كان مشغولاً وتشغيل سيرفر FastAPI الموحد
+    requested_port = int(os.getenv("API_PORT", 8000))
+    port = _ensure_port_available(requested_port)
+
     dashboard_url = f"http://localhost:{port}/"
     swagger_url = f"http://localhost:{port}/docs"
     health_url = f"http://localhost:{port}/health"
@@ -156,14 +197,13 @@ def main():
     print("\n" + "╔" + "═" * 83 + "╗")
     print("║ 🌐 UNIFIED FASTAPI SERVER & WEB COMMAND STUDIO IS STARTING NOW...                 ║")
     print("╠" + "═" * 83 + "╣")
-    print(f"║ 🚀 Web Command Studio (Dashboard) : {dashboard_url:<46}║")
+    print(f"║ 🚀 Web Studio Dashboard (الواجهة) : {dashboard_url:<46}║")
     print(f"║ 📘 Official Swagger UI (/docs)    : {swagger_url:<46}║")
     print(f"║ ❤️ System Health Check (/health)  : {health_url:<46}║")
-    print("║ 💡 اضغط Ctrl + Click على أي رابط أعلاه (أو سيفتح المتصفح تلقائياً الآن)           ║")
+    print("║ 💡 اضغط Ctrl + Click على الرابط أعلاه للدخول (وسيفتح المتصفح تلقائياً الآن!)      ║")
     print("║ 🛑 لإيقاف السيرفر في أي وقت اضغط : Ctrl + C                                       ║")
     print("╚" + "═" * 83 + "╝\n")
 
-    # فتح المتصفح تلقائياً بعد ثانية ونصف من بدء السيرفر
     threading.Timer(1.5, lambda: webbrowser.open(dashboard_url)).start()
 
     import uvicorn

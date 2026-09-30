@@ -536,5 +536,53 @@
         },
         "elapsed_seconds": 52.677,
         "throughput_rows_per_sec": 1030.02
+    },
+    {
+        "run_id": "b3622fdf-efc2-446d-b808-b6fdb9997340",
+        "engine_used": "python_batch",
+        "stage": "quality_validation_and_idempotent_upsert",
+        "rows_read": 36193,
+        "raw_loaded": 100000,
+        "valid_count": 31059,
+        "corrected_count": 3607,
+        "quarantine_count": 1527,
+        "consistency_equation_passed": false,
+        "inserted_count": 17290,
+        "updated_count": 17200,
+        "unchanged_count": 0,
+        "error_case_counts": {
+            "MISSING_CUSTOMER_ID": 513,
+            "CORRUPTED_ITEMS_JSON": 248,
+            "AMBIGUOUS_NEGATIVE_VALUE": 237,
+            "MISSING_ORDER_ID": 263,
+            "EMPTY_ITEMS": 246,
+            "INVALID_IMPOSSIBLE_DATE": 268
+        },
+        "elapsed_seconds": 41.3,
+        "throughput_rows_per_sec": 876.33
+    },
+    {
+        "run_id": "f6d33ecd-289e-4d91-8836-08db7e4d4c16",
+        "engine_used": "python_batch",
+        "stage": "quality_validation_and_idempotent_upsert",
+        "rows_read": 100000,
+        "raw_loaded": 100000,
+        "valid_count": 85926,
+        "corrected_count": 9866,
+        "quarantine_count": 4208,
+        "consistency_equation_passed": true,
+        "inserted_count": 26288,
+        "updated_count": 69062,
+        "unchanged_count": 0,
+        "error_case_counts": {
+            "MISSING_CUSTOMER_ID": 1411,
+            "CORRUPTED_ITEMS_JSON": 674,
+            "AMBIGUOUS_NEGATIVE_VALUE": 677,
+            "MISSING_ORDER_ID": 721,
+            "EMPTY_ITEMS": 677,
+            "INVALID_IMPOSSIBLE_DATE": 722
+        },
+        "elapsed_seconds": 124.605,
+        "throughput_rows_per_sec": 802.53
     }
 ]
