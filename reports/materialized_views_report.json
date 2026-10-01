@@ -1,15 +1,15 @@
 {
   "status": "success",
-  "refreshed_at": "2026-10-01T00:55:03.902078+00:00",
+  "refreshed_at": "2026-10-01T19:19:37.998299+00:00",
   "views": {
     "daily_sales_summary": {
       "metrics": {
         "view_name": "daily_sales_summary",
-        "refresh_mode": "initial_seed",
-        "delta_records_processed": 95136,
-        "upserted_or_modified_groups": 121,
+        "refresh_mode": "incremental_noop",
+        "delta_records_processed": 0,
+        "upserted_or_modified_groups": 0,
         "total_view_documents": 121,
-        "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00"
+        "last_refreshed_at": "2026-10-01T19:19:37.982241+00:00"
       },
       "sample_top_rows": [
         {
@@ -87,11 +87,11 @@
     "top_products_summary": {
       "metrics": {
         "view_name": "top_products_summary",
-        "refresh_mode": "initial_seed",
-        "delta_records_processed": 95136,
-        "upserted_or_modified_groups": 8,
+        "refresh_mode": "incremental_noop",
+        "delta_records_processed": 0,
+        "upserted_or_modified_groups": 0,
         "total_view_documents": 8,
-        "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00"
+        "last_refreshed_at": "2026-10-01T19:19:37.990242+00:00"
       },
       "sample_top_rows": [
         {

@@ -2,7 +2,7 @@
 Distributed Raw Ingestion Component via PySpark
 ================================================
 Fully compliant with official midterm requirements:
-- Section 6.4: PySpark DataFrame API, Explicit StructType Schema, String-Raw fields, Parallel MongoDB Connector, No Pandas.
+- Section 6.4: PySpark DataFrame API, Explicit StructType Schema, String-Raw fields, Parallel MongoDB Connector, Pure Native Spark API.
 - Section 6.5: Complete Raw Layer ingestion with run_id, source_file, source_row_number, ingested_at, engine_used, raw_record.
 - Section 6.10: Idempotency enforcement (cleans prior runs of the same file).
 - Section 6.12: Execution metrics recording (partitions, throughput, elapsed time).
