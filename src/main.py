@@ -2,9 +2,10 @@
 Hybrid ELT Data Pipeline & Phase 2 Analytics - Ultimate One-Click Master Entrypoint
 ===================================================================================
 One-click execution running:
-1. Phase 1 (Midterm 18G): File Router -> Raw Ingestion -> 8 Quality Rules -> Quarantine & Upsert
+1. Phase 1 (Midterm 18G): Zero-Duplicate Raw Ingestion -> 8 Quality Rules -> Quarantine & Upsert
 2. Phase 2 (Final 7G)   : 3 Indexes & Explain -> 5 Queries -> 5 Aggregations -> 2 Incremental MVs -> 2 Jobs
-3. Live Web Server      : Auto-frees port 8000 if busy, starts FastAPI Server & opens http://localhost:8000
+3. Full Report Engine   : Generates all 7 JSON & Markdown reports in reports/
+4. Live Web Server      : Auto-frees port 8000 if busy, starts FastAPI Server & opens http://localhost:8000
 """
 import os
 import sys
@@ -13,14 +14,15 @@ import subprocess
 import threading
 import webbrowser
 from pathlib import Path
+from pymongo import MongoClient
 
-# ضبط مسار المشروع تلقائياً ليعمل زر Run (▷) في VS Code أو من الطرفية مباشرة
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = CURRENT_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 os.chdir(PROJECT_ROOT)
 
+from config import settings
 from config.settings import SAMPLE_FILE, INPUT_FILE
 from src.file_router import route_file
 from src.batch_loader import run_batch_pipeline
@@ -37,13 +39,13 @@ from src.aggregations import (
 )
 from src.materialized_views import refresh_all_materialized_views
 from src.scheduler import run_job_by_name
+from src.api import generate_all_project_reports
 
 
 def _ensure_port_available(port: int) -> int:
-    """فحص المنفذ وتحريره تلقائياً إذا كان محجوزاً من عملية سابقة في ويندوز، أو اختيار منفذ بديل"""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         if s.connect_ex(("127.0.0.1", port)) != 0:
-            return port  # المنفذ متاح وجاهز
+            return port
 
     print(f"[*] المنفذ {port} مشغول بعملية سابقة، جاري تحريره تلقائياً...")
     if os.name == "nt":
@@ -61,12 +63,10 @@ def _ensure_port_available(port: int) -> int:
         except Exception:
             pass
 
-    # التحقق مرة أخرى بعد التحرير
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         if s.connect_ex(("127.0.0.1", port)) != 0:
             return port
 
-    # إذا بقي مشغولاً لأي سبب، نختار المنفذ التالي المتاح (مثل 8001) حتى لا يتوقف البرنامج أبداً
     for alt_port in range(port + 1, port + 20):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if s.connect_ex(("127.0.0.1", alt_port)) != 0:
@@ -75,7 +75,7 @@ def _ensure_port_available(port: int) -> int:
 
 
 def execute_pipeline(input_file_path: str, run_phase2: bool = True):
-    """تشغيل خط البيانات الكامل (المرحلة الأولى + المرحلة الثانية) بالتتابع"""
+    """تشغيل خط البيانات الكامل (المرحلة الأولى + المرحلة الثانية + توليد كافة التقارير) بدون أي تكرار"""
     input_file = Path(input_file_path)
     if not input_file.is_absolute():
         input_file = PROJECT_ROOT / input_file
@@ -88,29 +88,38 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
     print("🚀 STARTING FULL HYBRID DATA PIPELINE (PHASE 1 MIDTERM + PHASE 2 FINAL)")
     print("=" * 85)
 
-    # =========================================================================
-    # PHASE 1 - STAGE 1: Smart File Routing & Raw Ingestion (Sections 6.2 - 6.5)
-    # =========================================================================
+    # منع تراكم نسخ مكررة في orders_raw و orders_quarantine لنفس الملف عند إعادة التشغيل
+    clean_name = input_file.name.replace("uploaded_", "")
+    client = MongoClient(settings.MONGO_URI)
+    try:
+        db = client[settings.MONGO_DATABASE]
+        db[settings.RAW_COLLECTION].delete_many({
+            "source_file": {"$in": [input_file.name, clean_name, str(input_file)]}
+        })
+        db[settings.QUARANTINE_COLLECTION].delete_many({
+            "source_file": {"$in": [input_file.name, clean_name, str(input_file)]}
+        })
+    finally:
+        client.close()
+
+    # PHASE 1 - STAGE 1: Smart File Routing & Raw Ingestion
     engine = route_file(str(input_file))
     if engine == "python_batch":
         run_id = run_batch_pipeline(str(input_file))
     else:
         run_id = run_spark_pipeline(str(input_file))
 
-    # =========================================================================
     # PHASE 1 - STAGE 2: 8 Cleaning Rules, Quarantine & Idempotent Upsert
-    # =========================================================================
     print("\n" + "=" * 85)
     print("🧹 STAGE 2: ELT CLEANING, VALIDATION, QUARANTINE & IDEMPOTENT UPSERT")
     print("=" * 85)
     run_elt_pipeline(target_run_id=run_id)
 
     if not run_phase2:
+        generate_all_project_reports()
         return run_id
 
-    # =========================================================================
     # PHASE 2 - REQUIREMENT 1: 3 Indexes, Explain Benchmark & 5 Queries
-    # =========================================================================
     print("\n" + "=" * 85)
     print("⚡ STAGE 3 (PHASE 2): BUILDING 3 INDEXES, RUNNING EXPLAIN & 5 QUERIES")
     print("=" * 85)
@@ -122,9 +131,7 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
         q_res = execute_named_query(q["name"], limit=5)
         print(f" [Query OK] {q['name']} -> Returned {q_res['count_returned']} records")
 
-    # =========================================================================
     # PHASE 2 - REQUIREMENT 2: 5 MongoDB Aggregation Reports
-    # =========================================================================
     print("\n" + "=" * 85)
     print("📊 STAGE 4 (PHASE 2): EXECUTING 5 ANALYTICAL AGGREGATION REPORTS")
     print("=" * 85)
@@ -132,9 +139,7 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
         agg_res = run_aggregation_report(agg["name"], limit=5)
         print(f" [Aggregation OK] {agg['name']} -> Returned {agg_res['count_returned']} summary rows")
 
-    # =========================================================================
     # PHASE 2 - REQUIREMENT 3: 2 Materialized Views with Incremental Refresh
-    # =========================================================================
     print("\n" + "=" * 85)
     print("🔄 STAGE 5 (PHASE 2): INCREMENTAL REFRESH OF 2 MATERIALIZED VIEWS")
     print("=" * 85)
@@ -146,9 +151,7 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
             f"| Delta Processed: {m['delta_records_processed']} | Total Rows: {m['total_view_documents']}"
         )
 
-    # =========================================================================
     # PHASE 2 - REQUIREMENT 4: 2 Scheduled Jobs Execution & Audit Logging
-    # =========================================================================
     print("\n" + "=" * 85)
     print("⏱️ STAGE 6 (PHASE 2): RUNNING 2 SCHEDULED JOBS & SAVING AUDIT LOGS")
     print("=" * 85)
@@ -158,8 +161,11 @@ def execute_pipeline(input_file_path: str, run_phase2: bool = True):
     job2 = run_job_by_name("generate_periodic_report_job")
     print(f" [Job 2 OK] {job2['job_name']} -> Status: {job2['status']} ({job2['duration_seconds']}s)")
 
+    # توليد كافة التقارير الـ 7 (النصفي + النهائي)
+    generate_all_project_reports(mv_summary=mv_res)
     print("\n" + "=" * 85)
-    print("✅ ALL PHASE 1 & PHASE 2 PIPELINE STAGES COMPLETED SUCCESSFULLY!")
+    print("📑 ALL 7 REPORTS GENERATED IN reports/ (results.json, results.md, explain, aggregations, MVs, jobs)")
+    print("✅ ALL PHASE 1 & PHASE 2 PIPELINE STAGES COMPLETED SUCCESSFULLY (ZERO DUPLICATES)!")
     print("=" * 85)
 
     return run_id
@@ -179,14 +185,12 @@ def main():
     else:
         target_file = "data/orders_sample.csv"
 
-    # 1. تشغيل المراحل الـ 6 كاملة (إلا إذا طُلب تشغيل السيرفر فقط عبر --server-only)
     if not server_only:
         execute_pipeline(target_file, run_phase2=True)
 
     if no_server:
         return
 
-    # 2. تحرير المنفذ 8000 تلقائياً إذا كان مشغولاً وتشغيل سيرفر FastAPI الموحد
     requested_port = int(os.getenv("API_PORT", 8000))
     port = _ensure_port_available(requested_port)
 
