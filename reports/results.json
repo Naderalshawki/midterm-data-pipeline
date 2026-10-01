@@ -964,5 +964,46 @@
         },
         "elapsed_seconds": 131.462,
         "throughput_rows_per_sec": 760.68
+    },
+    {
+        "run_id": "765b32b5-df62-46b7-bc9f-d0a1958b6fe2",
+        "engine_used": "python_batch",
+        "stage": "quality_validation_and_idempotent_upsert",
+        "rows_read": 10,
+        "raw_loaded": 10,
+        "valid_count": 8,
+        "corrected_count": 2,
+        "quarantine_count": 0,
+        "consistency_equation_passed": true,
+        "inserted_count": 10,
+        "updated_count": 0,
+        "unchanged_count": 0,
+        "error_case_counts": {},
+        "elapsed_seconds": 0.266,
+        "throughput_rows_per_sec": 37.6
+    },
+    {
+        "run_id": "da0b3205-7406-4490-80f5-5f93b2e60de9",
+        "engine_used": "python_batch",
+        "stage": "quality_validation_and_idempotent_upsert",
+        "rows_read": 100000,
+        "raw_loaded": 100000,
+        "valid_count": 85926,
+        "corrected_count": 9866,
+        "quarantine_count": 4208,
+        "consistency_equation_passed": true,
+        "inserted_count": 0,
+        "updated_count": 95350,
+        "unchanged_count": 0,
+        "error_case_counts": {
+            "MISSING_CUSTOMER_ID": 1411,
+            "CORRUPTED_ITEMS_JSON": 674,
+            "AMBIGUOUS_NEGATIVE_VALUE": 677,
+            "MISSING_ORDER_ID": 721,
+            "EMPTY_ITEMS": 677,
+            "INVALID_IMPOSSIBLE_DATE": 722
+        },
+        "elapsed_seconds": 75.202,
+        "throughput_rows_per_sec": 1329.75
     }
 ]

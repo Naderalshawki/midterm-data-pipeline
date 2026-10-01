@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "refreshed_at": "2026-10-01T19:19:37.998299+00:00",
+  "refreshed_at": "2026-10-01T21:23:05.563142+00:00",
   "views": {
     "daily_sales_summary": {
       "metrics": {
@@ -8,10 +8,17 @@
         "refresh_mode": "incremental_noop",
         "delta_records_processed": 0,
         "upserted_or_modified_groups": 0,
-        "total_view_documents": 121,
-        "last_refreshed_at": "2026-10-01T19:19:37.982241+00:00"
+        "total_view_documents": 122,
+        "last_refreshed_at": "2026-10-01T21:23:05.549708+00:00"
       },
       "sample_top_rows": [
+        {
+          "period_date": "2026-10-01",
+          "daily_revenue": 2957000.0,
+          "last_refreshed_at": "2026-10-01T19:30:38.814869+00:00",
+          "total_delivery_cost": 35000.0,
+          "total_orders": 10
+        },
         {
           "period_date": "2025-05-01",
           "daily_revenue": 74428500.0,
@@ -74,13 +81,6 @@
           "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
           "total_delivery_cost": 2622000.0,
           "total_orders": 756
-        },
-        {
-          "period_date": "2025-04-22",
-          "daily_revenue": 224569500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2922000.0,
-          "total_orders": 834
         }
       ]
     },
@@ -91,50 +91,50 @@
         "delta_records_processed": 0,
         "upserted_or_modified_groups": 0,
         "total_view_documents": 8,
-        "last_refreshed_at": "2026-10-01T19:19:37.990242+00:00"
+        "last_refreshed_at": "2026-10-01T21:23:05.558104+00:00"
       },
       "sample_top_rows": [
         {
           "product_name": "SKU-1010",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31019,
-          "total_product_revenue": 13432221500.0,
-          "total_quantity_sold": 61297
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31025,
+          "total_product_revenue": 13433727000.0,
+          "total_quantity_sold": 61304
         },
         {
           "product_name": "SKU-1007",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31445,
-          "total_product_revenue": 6817677000.0,
-          "total_quantity_sold": 62314
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31446,
+          "total_product_revenue": 6817856000.0,
+          "total_quantity_sold": 62315
         },
         {
           "product_name": "SKU-1005",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31546,
-          "total_product_revenue": 1787677500.0,
-          "total_quantity_sold": 62745
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31549,
+          "total_product_revenue": 1787866500.0,
+          "total_quantity_sold": 62752
         },
         {
           "product_name": "SKU-1008",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31459,
-          "total_product_revenue": 622449500.0,
-          "total_quantity_sold": 62420
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31463,
+          "total_product_revenue": 622524000.0,
+          "total_quantity_sold": 62429
         },
         {
           "product_name": "SKU-1002",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31410,
-          "total_product_revenue": 556139500.0,
-          "total_quantity_sold": 62283
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31412,
+          "total_product_revenue": 556168500.0,
+          "total_quantity_sold": 62286
         },
         {
           "product_name": "SKU-1009",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 31440,
-          "total_product_revenue": 497564500.0,
-          "total_quantity_sold": 62619
+          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+          "order_count": 31441,
+          "total_product_revenue": 497594500.0,
+          "total_quantity_sold": 62622
         },
         {
           "product_name": "SKU-1001",
@@ -156,19 +156,19 @@
   "watermarks": [
     {
       "view_name": "daily_sales_summary",
-      "last_delta_records": 95136,
-      "last_mode": "initial_seed",
-      "last_object_id": "6abd99d0cde35dd917d1842f",
-      "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-      "last_updated_at": "2026-10-01T00:40:38Z"
+      "last_delta_records": 10,
+      "last_mode": "incremental_delta",
+      "last_object_id": "6abeb4decde35dd917d184c5",
+      "last_refreshed_at": "2026-10-01T19:30:38.814869+00:00",
+      "last_updated_at": "2026-10-01T19:30:38Z"
     },
     {
       "view_name": "top_products_summary",
-      "last_delta_records": 95136,
-      "last_mode": "initial_seed",
-      "last_object_id": "6abd99d0cde35dd917d1842f",
-      "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-      "last_updated_at": "2026-10-01T00:40:38Z"
+      "last_delta_records": 10,
+      "last_mode": "incremental_delta",
+      "last_object_id": "6abeb4decde35dd917d184c5",
+      "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
+      "last_updated_at": "2026-10-01T19:30:38Z"
     }
   ]
 }
