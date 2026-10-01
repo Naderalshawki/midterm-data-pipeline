@@ -1,8 +1,8 @@
 # 📊 Comprehensive Pipeline Execution & Audit Report (Phase 1 & Phase 2)
 
-- **Generated At (UTC):** `2026-09-30T23:56:28.725079+00:00`
+- **Generated At (UTC):** `2026-10-01T00:55:07.123749+00:00`
 - **Database:** `hybrid_pipeline_db`
-- **Latest Run ID:** `e395e099-f66f-47af-86cb-6966fb9a993b`
+- **Latest Run ID:** `719522f7-7193-41e4-8502-7e35ef4d818b`
 
 ---
 
@@ -16,16 +16,16 @@
 | **Consistency Check (Section 6.11)** | `PASSED (Raw == Valid + Corrected + Quarantine)` |
 | **Idempotent Upsert - Inserted** | `0` |
 | **Idempotent Upsert - Updated** | `0` |
-| **Elapsed Time (s)** | `169.083` |
-| **Throughput (rows/s)** | `591.43` |
+| **Elapsed Time (s)** | `37.296` |
+| **Throughput (rows/s)** | `2681.27` |
 
 ---
 
 ## 2. Phase 2: Materialized Views & Incremental Refresh Status
 | Materialized View | Refresh Mode | Delta Records Processed | Total View Documents |
 | :--- | :---: | :---: | :---: |
-| **`daily_sales_summary`** | `incremental_noop` | `0` | `121` |
-| **`top_products_summary`** | `incremental_noop` | `0` | `8` |
+| **`daily_sales_summary`** | `initial_seed` | `95136` | `121` |
+| **`top_products_summary`** | `initial_seed` | `95136` | `8` |
 
 ---
 

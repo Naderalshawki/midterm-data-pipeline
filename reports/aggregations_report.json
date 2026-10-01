@@ -236,19 +236,19 @@
         "total_spent": 1762000.0
       },
       {
-        "customer_phone": "+967704151560",
-        "city": "إب",
-        "orders_count": 1,
-        "last_order_date": "2025-02-05T08:07:00Z",
-        "customer_id": "عميل-96727",
-        "total_spent": 1759500.0
-      },
-      {
         "customer_phone": "+967704770474",
         "city": "الحديدة",
         "orders_count": 1,
         "last_order_date": "2025-01-24T20:16:00Z",
         "customer_id": "عميل-10430",
+        "total_spent": 1759500.0
+      },
+      {
+        "customer_phone": "+967704151560",
+        "city": "إب",
+        "orders_count": 1,
+        "last_order_date": "2025-02-05T08:07:00Z",
+        "customer_id": "عميل-96727",
         "total_spent": 1759500.0
       },
       {

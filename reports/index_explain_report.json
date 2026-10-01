@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T23:23:03.301565+00:00",
+  "generated_at": "2026-10-01T00:40:52.022073+00:00",
   "database": "hybrid_pipeline_db",
   "collection": "orders_validated",
   "indexes_created": [
@@ -65,9 +65,9 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 428,
+        "executionTimeMillis": 157,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95136,
+        "totalDocsExamined": 95146,
         "nReturned": 25
       },
       "after_index": {
@@ -78,12 +78,12 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 118,
+        "executionTimeMillis": 12,
         "totalKeysExamined": 25,
         "totalDocsExamined": 25,
         "nReturned": 25
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95136 إلى 25، وتغير زمن التنفيذ من 428ms إلى 118ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 25، وتغير زمن التنفيذ من 157ms إلى 12ms."
     },
     {
       "query_name": "customer_order_history",
@@ -99,10 +99,10 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 391,
+        "executionTimeMillis": 171,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95136,
-        "nReturned": 1
+        "totalDocsExamined": 95146,
+        "nReturned": 2
       },
       "after_index": {
         "scan_stage": "IXSCAN",
@@ -112,12 +112,12 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 62,
-        "totalKeysExamined": 1,
-        "totalDocsExamined": 1,
-        "nReturned": 1
+        "executionTimeMillis": 13,
+        "totalKeysExamined": 2,
+        "totalDocsExamined": 2,
+        "nReturned": 2
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95136 إلى 1، وتغير زمن التنفيذ من 391ms إلى 62ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 2، وتغير زمن التنفيذ من 171ms إلى 13ms."
     },
     {
       "query_name": "high_value_orders_range",
@@ -136,9 +136,9 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 584,
+        "executionTimeMillis": 271,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95136,
+        "totalDocsExamined": 95146,
         "nReturned": 25
       },
       "after_index": {
@@ -149,12 +149,12 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 32,
+        "executionTimeMillis": 10,
         "totalKeysExamined": 25,
         "totalDocsExamined": 25,
         "nReturned": 25
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95136 إلى 25، وتغير زمن التنفيذ من 584ms إلى 32ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 25، وتغير زمن التنفيذ من 271ms إلى 10ms."
     }
   ]
 }
