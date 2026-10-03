@@ -4,3 +4,7 @@ data/*.csv
 *.csv
 __pycache__/
 .pytest_cache/
+
+# Allow evaluation sample datasets on any machine
+!data/01_student_test_small.csv
+!data/doctor_live_test_batch.csv
