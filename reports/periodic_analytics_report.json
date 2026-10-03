@@ -1,116 +1,110 @@
 {
-  "generated_at": "2026-10-01T21:23:07.771214+00:00",
+  "generated_at": "2026-10-03T22:07:02.804369+00:00",
   "top_cities_by_sales": [
     {
-      "total_orders": 9599,
+      "total_orders": 9018,
       "city": "عدن",
-      "total_revenue": 2542540500.0,
-      "avg_order_value": 264875.56,
-      "total_delivery_cost": 33499000.0
+      "total_revenue": 2395558000.0,
+      "avg_order_value": 265641.83,
+      "total_delivery_cost": 31452000.0
     },
     {
-      "total_orders": 9613,
+      "total_orders": 9085,
       "city": "لحج",
-      "total_revenue": 2490809000.0,
-      "avg_order_value": 259108.39,
-      "total_delivery_cost": 33611000.0
+      "total_revenue": 2350156000.0,
+      "avg_order_value": 258685.31,
+      "total_delivery_cost": 31817000.0
     },
     {
-      "total_orders": 9479,
+      "total_orders": 8939,
       "city": "الحديدة",
-      "total_revenue": 2473901000.0,
-      "avg_order_value": 260987.55,
-      "total_delivery_cost": 33217000.0
+      "total_revenue": 2330192500.0,
+      "avg_order_value": 260677.09,
+      "total_delivery_cost": 31318000.0
     },
     {
-      "total_orders": 9644,
+      "total_orders": 9110,
       "city": "ذمار",
-      "total_revenue": 2458999500.0,
-      "avg_order_value": 254977.14,
-      "total_delivery_cost": 33778000.0
+      "total_revenue": 2319633500.0,
+      "avg_order_value": 254624.97,
+      "total_delivery_cost": 31897000.0
     },
     {
-      "total_orders": 9436,
-      "city": "المكلا",
-      "total_revenue": 2446592000.0,
-      "avg_order_value": 259282.75,
-      "total_delivery_cost": 32990000.0
+      "total_orders": 8831,
+      "city": "إب",
+      "total_revenue": 2308733000.0,
+      "avg_order_value": 261435.06,
+      "total_delivery_cost": 31051000.0
     }
   ],
   "orders_by_status": [
     {
-      "orders_count": 15825,
-      "status": "confirmed",
-      "status_revenue": 4053912000.0,
-      "avg_amount": 256171.37
-    },
-    {
-      "orders_count": 15812,
+      "orders_count": 15066,
       "status": "cancelled",
-      "status_revenue": 4092059000.0,
-      "avg_amount": 258794.52
+      "status_revenue": 3893684500.0,
+      "avg_amount": 258441.82
     },
     {
-      "orders_count": 15805,
+      "orders_count": 14991,
+      "status": "confirmed",
+      "status_revenue": 3854787000.0,
+      "avg_amount": 257140.08
+    },
+    {
+      "orders_count": 14982,
       "status": "returned",
-      "status_revenue": 4032245500.0,
-      "avg_amount": 255124.68
+      "status_revenue": 3815278000.0,
+      "avg_amount": 254657.46
     },
     {
-      "orders_count": 15725,
-      "status": "shipped",
-      "status_revenue": 4074893500.0,
-      "avg_amount": 259134.72
-    },
-    {
-      "orders_count": 15669,
+      "orders_count": 14930,
       "status": "pending",
-      "status_revenue": 4104392500.0,
-      "avg_amount": 261943.49
+      "status_revenue": 3911017500.0,
+      "avg_amount": 261956.97
     },
     {
-      "orders_count": 15594,
+      "orders_count": 14847,
+      "status": "shipped",
+      "status_revenue": 3844972000.0,
+      "avg_amount": 258972.99
+    },
+    {
+      "orders_count": 14787,
       "status": "delivered",
-      "status_revenue": 4027886000.0,
-      "avg_amount": 258297.17
-    },
-    {
-      "orders_count": 716,
-      "status": "حالة غير معروفة تمامًا",
-      "status_revenue": 180718000.0,
-      "avg_amount": 252399.44
+      "status_revenue": 3827633000.0,
+      "avg_amount": 258851.22
     }
   ],
   "top_selling_products": [
     {
-      "total_quantity_sold": 61304,
-      "order_count": 31025,
-      "product_name": "SKU-1010",
-      "total_product_revenue": 13433727000.0
+      "total_quantity_sold": 58759,
+      "order_count": 29511,
+      "product_name": "هاتف سامسونج A54",
+      "total_product_revenue": 12925986500.0
     },
     {
-      "total_quantity_sold": 62315,
-      "order_count": 31446,
-      "product_name": "SKU-1007",
-      "total_product_revenue": 6817856000.0
+      "total_quantity_sold": 59837,
+      "order_count": 29985,
+      "product_name": "قرص SSD محمول",
+      "total_product_revenue": 6570919000.0
     },
     {
-      "total_quantity_sold": 62752,
-      "order_count": 31549,
-      "product_name": "SKU-1005",
-      "total_product_revenue": 1787866500.0
+      "total_quantity_sold": 60230,
+      "order_count": 30049,
+      "product_name": "سماعات رأس",
+      "total_product_revenue": 1721855500.0
     },
     {
-      "total_quantity_sold": 62429,
-      "order_count": 31463,
-      "product_name": "SKU-1008",
-      "total_product_revenue": 622524000.0
+      "total_quantity_sold": 59943,
+      "order_count": 29970,
+      "product_name": "محول HDMI",
+      "total_product_revenue": 600475000.0
     },
     {
-      "total_quantity_sold": 62286,
-      "order_count": 31412,
-      "product_name": "SKU-1002",
-      "total_product_revenue": 556168500.0
+      "total_quantity_sold": 59743,
+      "order_count": 29938,
+      "product_name": "فأرة لاسلكية",
+      "total_product_revenue": 535584000.0
     }
   ]
 }

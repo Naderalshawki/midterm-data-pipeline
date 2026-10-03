@@ -41,7 +41,6 @@ def save_metrics_report(metrics_summary: dict) -> Path:
         except Exception:
             history = []
 
-    # إزالة أي تقرير يحمل نفس الـ run_id لتحديثه
     history = [item for item in history if item.get("run_id") != metrics_summary.get("run_id")]
     history.append(metrics_summary)
 
@@ -49,6 +48,24 @@ def save_metrics_report(metrics_summary: dict) -> Path:
         json.dump(history, f, indent=4, ensure_ascii=False)
 
     return report_file
+
+
+def _flush_validated_ops(val_col, val_ops: list) -> tuple[int, int, int]:
+    """تنفيذ عمليات الـ Upsert وإرجاع (inserted, updated, unchanged) بدقة"""
+    if not val_ops:
+        return 0, 0, 0
+    try:
+        res = val_col.bulk_write(val_ops, ordered=True)
+        ins = res.upserted_count
+        upd = res.modified_count
+        unc = res.matched_count - res.modified_count
+        return ins, upd, unc
+    except BulkWriteError as bwe:
+        details = bwe.details or {}
+        ins = details.get("nUpserted", 0)
+        upd = details.get("nModified", 0)
+        unc = details.get("nMatched", 0) - upd
+        return ins, upd, unc
 
 
 def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
@@ -65,7 +82,6 @@ def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
     val_col = db[VALIDATED_COLLECTION]
     quar_col = db[QUARANTINE_COLLECTION]
 
-    # إنشاء الفهارس المطلوبة
     val_col.create_index([("order_id", 1)], unique=True)
     val_col.create_index([("run_id", 1)])
     quar_col.create_index([("run_id", 1)])
@@ -76,16 +92,16 @@ def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
             raise RuntimeError("No raw data found in orders_raw collection.")
         target_run_id = latest_raw["run_id"]
 
-    # تنظيف أي سجلات عزل سابقة لنفس الـ run_id لمنع التكرار
     quar_col.delete_many({"run_id": target_run_id})
 
     raw_count_before = raw_col.count_documents({"run_id": target_run_id})
     validated_count_before = val_col.count_documents({})
+    effective_batch = min(chunk_size, raw_count_before) if raw_count_before > 0 else chunk_size
 
     print(f"Target Run ID              : {target_run_id}")
     print(f"Raw Records to Process     : {raw_count_before:,}")
     print(f"Validated Records Before   : {validated_count_before:,}")
-    print(f"Batch Processing Size      : {chunk_size:,}")
+    print(f"Batch Processing Size      : {effective_batch:,} (Max Cap: {chunk_size:,})")
     print("-" * 75)
 
     valid_count = 0
@@ -99,7 +115,7 @@ def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
     processed_rows = 0
     cursor = raw_col.find({"run_id": target_run_id}, no_cursor_timeout=True).batch_size(chunk_size)
 
-    val_batch_dict = {}
+    val_ops = []
     quar_batch = []
 
     try:
@@ -158,29 +174,25 @@ def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
                     "run_id": target_run_id,
                 }
 
-                val_batch_dict[order_id] = UpdateOne(
-                    {"order_id": order_id},
-                    {"$set": val_payload},
-                    upsert=True,
+                val_ops.append(
+                    UpdateOne(
+                        {"order_id": order_id},
+                        {"$set": val_payload},
+                        upsert=True,
+                    )
                 )
 
-            if len(val_batch_dict) >= chunk_size or len(quar_batch) >= chunk_size:
+            if len(val_ops) >= chunk_size or len(quar_batch) >= chunk_size:
                 if quar_batch:
                     quar_col.insert_many(quar_batch, ordered=False)
                     quar_batch.clear()
 
-                if val_batch_dict:
-                    val_ops = list(val_batch_dict.values())
-                    try:
-                        res = val_col.bulk_write(val_ops, ordered=False)
-                        inserted_count += res.upserted_count
-                        updated_count += res.modified_count
-                        unchanged_count += (res.matched_count - res.modified_count)
-                    except BulkWriteError as bwe:
-                        inserted_count += bwe.details.get("nUpserted", 0)
-                        updated_count += bwe.details.get("nModified", 0)
-                        unchanged_count += (bwe.details.get("nMatched", 0) - bwe.details.get("nModified", 0))
-                    val_batch_dict.clear()
+                if val_ops:
+                    ins, upd, unc = _flush_validated_ops(val_col, val_ops)
+                    inserted_count += ins
+                    updated_count += upd
+                    unchanged_count += unc
+                    val_ops.clear()
 
                 elapsed_mid = time.perf_counter() - start_time
                 rate = processed_rows / elapsed_mid if elapsed_mid > 0 else 0
@@ -190,18 +202,12 @@ def run_elt_pipeline(target_run_id: str = None, chunk_size: int = 50000):
             quar_col.insert_many(quar_batch, ordered=False)
             quar_batch.clear()
 
-        if val_batch_dict:
-            val_ops = list(val_batch_dict.values())
-            try:
-                res = val_col.bulk_write(val_ops, ordered=False)
-                inserted_count += res.upserted_count
-                updated_count += res.modified_count
-                unchanged_count += (res.matched_count - res.modified_count)
-            except BulkWriteError as bwe:
-                inserted_count += bwe.details.get("nUpserted", 0)
-                updated_count += bwe.details.get("nModified", 0)
-                unchanged_count += (bwe.details.get("nMatched", 0) - bwe.details.get("nModified", 0))
-            val_batch_dict.clear()
+        if val_ops:
+            ins, upd, unc = _flush_validated_ops(val_col, val_ops)
+            inserted_count += ins
+            updated_count += upd
+            unchanged_count += unc
+            val_ops.clear()
 
     finally:
         cursor.close()

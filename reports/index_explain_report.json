@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T21:23:00.017140+00:00",
+  "generated_at": "2026-10-03T22:06:50.507258+00:00",
   "database": "hybrid_pipeline_db",
   "collection": "orders_validated",
   "indexes_created": [
@@ -54,8 +54,8 @@
       "query_name": "city_status_recent_orders",
       "query_title": "1. طلبات مدينة محددة حسب الحالة مرتبة بالأحدث",
       "filter_used": {
-        "city": "تعز",
-        "status": "confirmed"
+        "city": "لحج",
+        "status": "pending"
       },
       "served_by_index": "idx_city_status_order_date (Compound Index)",
       "before_index": {
@@ -65,9 +65,9 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 288,
+        "executionTimeMillis": 355,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95146,
+        "totalDocsExamined": 89603,
         "nReturned": 25
       },
       "after_index": {
@@ -78,18 +78,18 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 25,
+        "executionTimeMillis": 56,
         "totalKeysExamined": 25,
         "totalDocsExamined": 25,
         "nReturned": 25
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 25، وتغير زمن التنفيذ من 288ms إلى 25ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 89603 إلى 25، وتغير زمن التنفيذ من 355ms إلى 56ms."
     },
     {
       "query_name": "customer_order_history",
       "query_title": "2. سجل طلبات عميل محدد",
       "filter_used": {
-        "customer_id": "عميل-0"
+        "customer_id": "عميل-1"
       },
       "served_by_index": "idx_customer_id_order_date (Compound Index)",
       "before_index": {
@@ -99,10 +99,10 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 398,
+        "executionTimeMillis": 310,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95146,
-        "nReturned": 2
+        "totalDocsExamined": 89603,
+        "nReturned": 1
       },
       "after_index": {
         "scan_stage": "IXSCAN",
@@ -112,20 +112,20 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 29,
-        "totalKeysExamined": 2,
-        "totalDocsExamined": 2,
-        "nReturned": 2
+        "executionTimeMillis": 33,
+        "totalKeysExamined": 1,
+        "totalDocsExamined": 1,
+        "nReturned": 1
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 2، وتغير زمن التنفيذ من 398ms إلى 29ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 89603 إلى 1، وتغير زمن التنفيذ من 310ms إلى 33ms."
     },
     {
       "query_name": "high_value_orders_range",
       "query_title": "3. الطلبات ذات القيمة المالية ضمن نطاق محدد",
       "filter_used": {
         "total_amount": {
-          "$gte": 384500.0,
-          "$lte": 3846000.0
+          "$gte": 273250.0,
+          "$lte": 2733500.0
         }
       },
       "served_by_index": "idx_total_amount (Single Field Index)",
@@ -136,9 +136,9 @@
           "SORT",
           "COLLSCAN"
         ],
-        "executionTimeMillis": 570,
+        "executionTimeMillis": 489,
         "totalKeysExamined": 0,
-        "totalDocsExamined": 95146,
+        "totalDocsExamined": 89603,
         "nReturned": 25
       },
       "after_index": {
@@ -149,12 +149,12 @@
           "FETCH",
           "IXSCAN"
         ],
-        "executionTimeMillis": 24,
+        "executionTimeMillis": 28,
         "totalKeysExamined": 25,
         "totalDocsExamined": 25,
         "nReturned": 25
       },
-      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 95146 إلى 25، وتغير زمن التنفيذ من 570ms إلى 24ms."
+      "impact_summary": "تحول المسح من COLLSCAN إلى IXSCAN، وانخفض عدد المستندات المفحوصة من 89603 إلى 25، وتغير زمن التنفيذ من 489ms إلى 28ms."
     }
   ]
 }

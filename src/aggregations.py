@@ -149,7 +149,9 @@ def list_available_aggregations():
         {
             "name": name,
             "title": meta["title"],
-            "description": meta["description"]
+            "description": meta["description"],
+            "independent_endpoint": f"/aggregations/{name}",
+            "independent_cli": f"python -m src.aggregations --report {name}",
         }
         for name, meta in pipelines.items()
     ]
@@ -176,9 +178,36 @@ def run_aggregation_report(report_name: str, limit: int = 20):
         client.close()
 
 
+# دوال تشغيل مستقلة لكل تقرير من التقارير الخمسة على حدة
+def run_sales_by_city_report(limit: int = 20):
+    return run_aggregation_report("sales_by_city", limit=limit)
+
+
+def run_top_products_report(limit: int = 20):
+    return run_aggregation_report("top_products", limit=limit)
+
+
+def run_top_customers_report(limit: int = 20):
+    return run_aggregation_report("top_customers", limit=limit)
+
+
+def run_sales_by_period_report(limit: int = 20):
+    return run_aggregation_report("sales_by_period", limit=limit)
+
+
+def run_orders_by_status_report(limit: int = 20):
+    return run_aggregation_report("orders_by_status", limit=limit)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run MongoDB Aggregation Reports")
-    parser.add_argument("--report", type=str, default="all", help="Name of report or 'all'")
+    parser.add_argument(
+        "--report",
+        type=str,
+        choices=["sales_by_city", "top_products", "top_customers", "sales_by_period", "orders_by_status", "all"],
+        default="all",
+        help="Name of report to run independently or 'all'",
+    )
     parser.add_argument("--limit", type=int, default=10, help="Max rows per report")
     args = parser.parse_args()
 

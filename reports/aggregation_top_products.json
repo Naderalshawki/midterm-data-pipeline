@@ -1,0 +1,44 @@
+{
+  "report_name": "top_products",
+  "title": "2. تقرير أفضل المنتجات مبيعاً (Top Selling Products)",
+  "description": "يفكك مصفوفة items لحساب إجمالي الكميات المباعة والإيرادات لكل منتج.",
+  "count_returned": 6,
+  "results": [
+    {
+      "total_quantity_sold": 11603,
+      "order_count": 5785,
+      "product_name": "هاتف سامسونج A54",
+      "total_product_revenue": 2557253000.0
+    },
+    {
+      "total_quantity_sold": 11127,
+      "order_count": 5581,
+      "product_name": "قرص SSD محمول",
+      "total_product_revenue": 1223599500.0
+    },
+    {
+      "total_quantity_sold": 11441,
+      "order_count": 5746,
+      "product_name": "سماعات رأس",
+      "total_product_revenue": 326689500.0
+    },
+    {
+      "total_quantity_sold": 11263,
+      "order_count": 5644,
+      "product_name": "محول HDMI",
+      "total_product_revenue": 112374500.0
+    },
+    {
+      "total_quantity_sold": 11352,
+      "order_count": 5693,
+      "product_name": "فأرة لاسلكية",
+      "total_product_revenue": 101945000.0
+    },
+    {
+      "total_quantity_sold": 11476,
+      "order_count": 5770,
+      "product_name": "شاحن سريع",
+      "total_product_revenue": 91333500.0
+    }
+  ]
+}

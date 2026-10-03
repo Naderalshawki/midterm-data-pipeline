@@ -1,154 +1,140 @@
 {
   "status": "success",
-  "refreshed_at": "2026-10-01T21:23:05.563142+00:00",
+  "refreshed_at": "2026-10-03T22:14:35.788841+00:00",
   "views": {
     "daily_sales_summary": {
       "metrics": {
         "view_name": "daily_sales_summary",
-        "refresh_mode": "incremental_noop",
-        "delta_records_processed": 0,
-        "upserted_or_modified_groups": 0,
-        "total_view_documents": 122,
-        "last_refreshed_at": "2026-10-01T21:23:05.549708+00:00"
+        "refresh_mode": "initial_seed",
+        "delta_records_processed": 17000,
+        "upserted_or_modified_groups": 181,
+        "total_view_documents": 181,
+        "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00"
       },
       "sample_top_rows": [
         {
-          "period_date": "2026-10-01",
-          "daily_revenue": 2957000.0,
-          "last_refreshed_at": "2026-10-01T19:30:38.814869+00:00",
-          "total_delivery_cost": 35000.0,
-          "total_orders": 10
+          "period_date": "2026-06-30",
+          "daily_revenue": 8270500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 103000.0,
+          "total_orders": 29
         },
         {
-          "period_date": "2025-05-01",
-          "daily_revenue": 74428500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 1055000.0,
-          "total_orders": 310
+          "period_date": "2026-06-29",
+          "daily_revenue": 23083000.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 310000.0,
+          "total_orders": 89
         },
         {
-          "period_date": "2025-04-30",
-          "daily_revenue": 224811000.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2941000.0,
-          "total_orders": 827
+          "period_date": "2026-06-28",
+          "daily_revenue": 20014500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 264000.0,
+          "total_orders": 81
         },
         {
-          "period_date": "2025-04-29",
-          "daily_revenue": 218650000.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2894000.0,
-          "total_orders": 832
+          "period_date": "2026-06-27",
+          "daily_revenue": 30472000.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 402000.0,
+          "total_orders": 117
         },
         {
-          "period_date": "2025-04-28",
-          "daily_revenue": 206701500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2784000.0,
-          "total_orders": 780
+          "period_date": "2026-06-26",
+          "daily_revenue": 22795500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 344000.0,
+          "total_orders": 94
         },
         {
-          "period_date": "2025-04-27",
-          "daily_revenue": 208980500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2763000.0,
-          "total_orders": 801
+          "period_date": "2026-06-25",
+          "daily_revenue": 19728000.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 278000.0,
+          "total_orders": 79
         },
         {
-          "period_date": "2025-04-26",
-          "daily_revenue": 189117500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2706000.0,
-          "total_orders": 762
+          "period_date": "2026-06-24",
+          "daily_revenue": 27506000.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 366000.0,
+          "total_orders": 105
         },
         {
-          "period_date": "2025-04-25",
-          "daily_revenue": 191110000.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2678000.0,
-          "total_orders": 751
+          "period_date": "2026-06-23",
+          "daily_revenue": 29948500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 338000.0,
+          "total_orders": 97
         },
         {
-          "period_date": "2025-04-24",
-          "daily_revenue": 216338000.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2971000.0,
-          "total_orders": 830
+          "period_date": "2026-06-22",
+          "daily_revenue": 24161500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 324000.0,
+          "total_orders": 93
         },
         {
-          "period_date": "2025-04-23",
-          "daily_revenue": 193006500.0,
-          "last_refreshed_at": "2026-10-01T00:55:02.425878+00:00",
-          "total_delivery_cost": 2622000.0,
-          "total_orders": 756
+          "period_date": "2026-06-21",
+          "daily_revenue": 30574500.0,
+          "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+          "total_delivery_cost": 358000.0,
+          "total_orders": 101
         }
       ]
     },
     "top_products_summary": {
       "metrics": {
         "view_name": "top_products_summary",
-        "refresh_mode": "incremental_noop",
-        "delta_records_processed": 0,
-        "upserted_or_modified_groups": 0,
-        "total_view_documents": 8,
-        "last_refreshed_at": "2026-10-01T21:23:05.558104+00:00"
+        "refresh_mode": "initial_seed",
+        "delta_records_processed": 17000,
+        "upserted_or_modified_groups": 6,
+        "total_view_documents": 6,
+        "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00"
       },
       "sample_top_rows": [
         {
-          "product_name": "SKU-1010",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31025,
-          "total_product_revenue": 13433727000.0,
-          "total_quantity_sold": 61304
+          "product_name": "هاتف سامسونج A54",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5785,
+          "total_product_revenue": 2557253000.0,
+          "total_quantity_sold": 11603
         },
         {
-          "product_name": "SKU-1007",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31446,
-          "total_product_revenue": 6817856000.0,
-          "total_quantity_sold": 62315
+          "product_name": "قرص SSD محمول",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5581,
+          "total_product_revenue": 1223599500.0,
+          "total_quantity_sold": 11127
         },
         {
-          "product_name": "SKU-1005",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31549,
-          "total_product_revenue": 1787866500.0,
-          "total_quantity_sold": 62752
+          "product_name": "سماعات رأس",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5746,
+          "total_product_revenue": 326689500.0,
+          "total_quantity_sold": 11441
         },
         {
-          "product_name": "SKU-1008",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31463,
-          "total_product_revenue": 622524000.0,
-          "total_quantity_sold": 62429
+          "product_name": "محول HDMI",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5644,
+          "total_product_revenue": 112374500.0,
+          "total_quantity_sold": 11263
         },
         {
-          "product_name": "SKU-1002",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31412,
-          "total_product_revenue": 556168500.0,
-          "total_quantity_sold": 62286
+          "product_name": "فأرة لاسلكية",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5693,
+          "total_product_revenue": 101945000.0,
+          "total_quantity_sold": 11352
         },
         {
-          "product_name": "SKU-1009",
-          "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-          "order_count": 31441,
-          "total_product_revenue": 497594500.0,
-          "total_quantity_sold": 62622
-        },
-        {
-          "product_name": "SKU-1001",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 659,
-          "total_product_revenue": 165758500.0,
-          "total_quantity_sold": 659
-        },
-        {
-          "product_name": "Product_Item",
-          "last_refreshed_at": "2026-10-01T00:55:03.106997+00:00",
-          "order_count": 736,
-          "total_product_revenue": 96497000.0,
-          "total_quantity_sold": 1486
+          "product_name": "شاحن سريع",
+          "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+          "order_count": 5770,
+          "total_product_revenue": 91333500.0,
+          "total_quantity_sold": 11476
         }
       ]
     }
@@ -156,19 +142,19 @@
   "watermarks": [
     {
       "view_name": "daily_sales_summary",
-      "last_delta_records": 10,
-      "last_mode": "incremental_delta",
-      "last_object_id": "6abeb4decde35dd917d184c5",
-      "last_refreshed_at": "2026-10-01T19:30:38.814869+00:00",
-      "last_updated_at": "2026-10-01T19:30:38Z"
+      "last_delta_records": 17000,
+      "last_mode": "initial_seed",
+      "last_object_id": "6ac17e4a95b522eb3370338b",
+      "last_refreshed_at": "2026-10-03T22:14:35.126172+00:00",
+      "last_updated_at": "2026-10-03T22:14:22Z"
     },
     {
       "view_name": "top_products_summary",
-      "last_delta_records": 10,
-      "last_mode": "incremental_delta",
-      "last_object_id": "6abeb4decde35dd917d184c5",
-      "last_refreshed_at": "2026-10-01T19:30:38.833392+00:00",
-      "last_updated_at": "2026-10-01T19:30:38Z"
+      "last_delta_records": 17000,
+      "last_mode": "initial_seed",
+      "last_object_id": "6ac17e4a95b522eb3370338b",
+      "last_refreshed_at": "2026-10-03T22:14:35.475892+00:00",
+      "last_updated_at": "2026-10-03T22:14:22Z"
     }
   ]
 }

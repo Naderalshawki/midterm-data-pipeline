@@ -1,0 +1,128 @@
+{
+  "report_name": "sales_by_period",
+  "title": "4. تقرير المبيعات حسب الفترة الزمنية (Sales by Date Period)",
+  "description": "يجمع المبيعات وعدد الطلبات يومياً (YYYY-MM-DD) لمتابعة الأداء الزمني.",
+  "count_returned": 20,
+  "results": [
+    {
+      "total_orders": 29,
+      "period_date": "2026-06-30",
+      "daily_revenue": 8270500.0,
+      "avg_order_amount": 285189.66
+    },
+    {
+      "total_orders": 89,
+      "period_date": "2026-06-29",
+      "daily_revenue": 23083000.0,
+      "avg_order_amount": 259359.55
+    },
+    {
+      "total_orders": 81,
+      "period_date": "2026-06-28",
+      "daily_revenue": 20014500.0,
+      "avg_order_amount": 247092.59
+    },
+    {
+      "total_orders": 117,
+      "period_date": "2026-06-27",
+      "daily_revenue": 30472000.0,
+      "avg_order_amount": 260444.44
+    },
+    {
+      "total_orders": 94,
+      "period_date": "2026-06-26",
+      "daily_revenue": 22795500.0,
+      "avg_order_amount": 242505.32
+    },
+    {
+      "total_orders": 79,
+      "period_date": "2026-06-25",
+      "daily_revenue": 19728000.0,
+      "avg_order_amount": 249721.52
+    },
+    {
+      "total_orders": 105,
+      "period_date": "2026-06-24",
+      "daily_revenue": 27506000.0,
+      "avg_order_amount": 261961.9
+    },
+    {
+      "total_orders": 97,
+      "period_date": "2026-06-23",
+      "daily_revenue": 29948500.0,
+      "avg_order_amount": 308747.42
+    },
+    {
+      "total_orders": 93,
+      "period_date": "2026-06-22",
+      "daily_revenue": 24161500.0,
+      "avg_order_amount": 259801.08
+    },
+    {
+      "total_orders": 101,
+      "period_date": "2026-06-21",
+      "daily_revenue": 30574500.0,
+      "avg_order_amount": 302717.82
+    },
+    {
+      "total_orders": 103,
+      "period_date": "2026-06-20",
+      "daily_revenue": 28957000.0,
+      "avg_order_amount": 281135.92
+    },
+    {
+      "total_orders": 89,
+      "period_date": "2026-06-19",
+      "daily_revenue": 22472500.0,
+      "avg_order_amount": 252500.0
+    },
+    {
+      "total_orders": 102,
+      "period_date": "2026-06-18",
+      "daily_revenue": 25625000.0,
+      "avg_order_amount": 251225.49
+    },
+    {
+      "total_orders": 91,
+      "period_date": "2026-06-17",
+      "daily_revenue": 17356000.0,
+      "avg_order_amount": 190725.27
+    },
+    {
+      "total_orders": 91,
+      "period_date": "2026-06-16",
+      "daily_revenue": 21622500.0,
+      "avg_order_amount": 237609.89
+    },
+    {
+      "total_orders": 101,
+      "period_date": "2026-06-15",
+      "daily_revenue": 24797000.0,
+      "avg_order_amount": 245514.85
+    },
+    {
+      "total_orders": 104,
+      "period_date": "2026-06-14",
+      "daily_revenue": 23460000.0,
+      "avg_order_amount": 225576.92
+    },
+    {
+      "total_orders": 87,
+      "period_date": "2026-06-13",
+      "daily_revenue": 24023000.0,
+      "avg_order_amount": 276126.44
+    },
+    {
+      "total_orders": 85,
+      "period_date": "2026-06-12",
+      "daily_revenue": 22474000.0,
+      "avg_order_amount": 264400.0
+    },
+    {
+      "total_orders": 84,
+      "period_date": "2026-06-11",
+      "daily_revenue": 22201500.0,
+      "avg_order_amount": 264303.57
+    }
+  ]
+}

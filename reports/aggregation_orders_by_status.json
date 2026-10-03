@@ -1,0 +1,44 @@
+{
+  "report_name": "orders_by_status",
+  "title": "5. تقرير توزيع الطلبات حسب الحالة (Orders Distribution by Status)",
+  "description": "يحلل توزيع الطلبات وقيمتها المالية حسب حالة الطلب (status).",
+  "count_returned": 6,
+  "results": [
+    {
+      "orders_count": 2962,
+      "status": "pending",
+      "status_revenue": 760852000.0,
+      "avg_amount": 256871.03
+    },
+    {
+      "orders_count": 2902,
+      "status": "shipped",
+      "status_revenue": 765342500.0,
+      "avg_amount": 263729.32
+    },
+    {
+      "orders_count": 2819,
+      "status": "cancelled",
+      "status_revenue": 722535500.0,
+      "avg_amount": 256309.15
+    },
+    {
+      "orders_count": 2798,
+      "status": "confirmed",
+      "status_revenue": 734908000.0,
+      "avg_amount": 262654.75
+    },
+    {
+      "orders_count": 2794,
+      "status": "delivered",
+      "status_revenue": 751223000.0,
+      "avg_amount": 268870.08
+    },
+    {
+      "orders_count": 2725,
+      "status": "returned",
+      "status_revenue": 737912000.0,
+      "avg_amount": 270793.39
+    }
+  ]
+}
