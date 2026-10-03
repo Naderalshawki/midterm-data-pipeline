@@ -1,5 +1,45 @@
 [
   {
+    "job_name": "generate_periodic_report_job",
+    "trigger_type": "scheduled",
+    "start_time": "2026-10-03T22:37:11.587286+00:00",
+    "end_time": "2026-10-03T22:37:11.818508+00:00",
+    "duration_seconds": 0.231,
+    "status": "SUCCESS",
+    "details": {
+      "report_file": "C:\\lec\\midterm-data-pipeline\\reports\\periodic_analytics_report.json",
+      "cities_analyzed": 5,
+      "statuses_analyzed": 6,
+      "top_products_count": 5
+    }
+  },
+  {
+    "job_name": "refresh_materialized_views_job",
+    "trigger_type": "scheduled",
+    "start_time": "2026-10-03T22:37:11.588284+00:00",
+    "end_time": "2026-10-03T22:37:11.613330+00:00",
+    "duration_seconds": 0.025,
+    "status": "SUCCESS",
+    "details": {
+      "daily_sales_metrics": {
+        "view_name": "daily_sales_summary",
+        "refresh_mode": "incremental_noop",
+        "delta_records_processed": 0,
+        "upserted_or_modified_groups": 0,
+        "total_view_documents": 181,
+        "last_refreshed_at": "2026-10-03T22:37:11.604316+00:00"
+      },
+      "top_products_metrics": {
+        "view_name": "top_products_summary",
+        "refresh_mode": "incremental_noop",
+        "delta_records_processed": 0,
+        "upserted_or_modified_groups": 0,
+        "total_view_documents": 6,
+        "last_refreshed_at": "2026-10-03T22:37:11.609287+00:00"
+      }
+    }
+  },
+  {
     "job_name": "refresh_materialized_views_job",
     "trigger_type": "scheduled",
     "start_time": "2026-10-03T22:22:11.590014+00:00",
@@ -1028,46 +1068,6 @@
         "upserted_or_modified_groups": 0,
         "total_view_documents": 8,
         "last_refreshed_at": "2026-10-01T00:40:55.296265+00:00"
-      }
-    }
-  },
-  {
-    "job_name": "generate_periodic_report_job",
-    "trigger_type": "manual",
-    "start_time": "2026-10-01T00:33:46.729071+00:00",
-    "end_time": "2026-10-01T00:33:47.845734+00:00",
-    "duration_seconds": 1.117,
-    "status": "SUCCESS",
-    "details": {
-      "report_file": "C:\\lec\\midterm-data-pipeline\\reports\\periodic_analytics_report.json",
-      "cities_analyzed": 5,
-      "statuses_analyzed": 7,
-      "top_products_count": 5
-    }
-  },
-  {
-    "job_name": "refresh_materialized_views_job",
-    "trigger_type": "manual",
-    "start_time": "2026-10-01T00:33:46.662331+00:00",
-    "end_time": "2026-10-01T00:33:46.688377+00:00",
-    "duration_seconds": 0.026,
-    "status": "SUCCESS",
-    "details": {
-      "daily_sales_metrics": {
-        "view_name": "daily_sales_summary",
-        "refresh_mode": "incremental_noop",
-        "delta_records_processed": 0,
-        "upserted_or_modified_groups": 0,
-        "total_view_documents": 122,
-        "last_refreshed_at": "2026-10-01T00:33:46.677364+00:00"
-      },
-      "top_products_metrics": {
-        "view_name": "top_products_summary",
-        "refresh_mode": "incremental_noop",
-        "delta_records_processed": 0,
-        "upserted_or_modified_groups": 0,
-        "total_view_documents": 8,
-        "last_refreshed_at": "2026-10-01T00:33:46.681361+00:00"
       }
     }
   }

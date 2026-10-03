@@ -1,21 +1,22 @@
 # 🚀 High-Performance Hybrid ELT Data Pipeline & Unified Analytics Engine (Phase 1 & Phase 2)
-> **Enterprise-Grade Distributed Big Data Ingestion (30M+ Orders), 8-Rule Quality Validation, Anomaly Quarantine, Idempotent Upsert, Indexed Operational Queries, Incremental Materialized Views, Scheduled Jobs, and Unified FastAPI Command Center.**
+> **Enterprise-Grade Distributed Big Data Ingestion (30M+ Orders), 8-Rule Quality Validation (21 Normalization & Repair Patterns), Anomaly Quarantine, Idempotent Upsert, Indexed Operational Queries, Independent Aggregations, Incremental Materialized Views, Scheduled Jobs, and Unified FastAPI Command Center.**
 
 **Lead Data Engineer & Architect:** **Eng. Nader Alshawki** ([@Naderalshawki](https://github.com/Naderalshawki))  
-**Course:** Big Data Engineering (Practical) — **Total Scope:** 25 Grades (Phase 1 Midterm: 18 Grades + Phase 2 Final Additions: 7 Grades)
+**Course:** Big Data Engineering (Practical) — **Scope:** Phase 1 (Midterm Core ELT Pipeline) & Phase 2 (Final Analytical Extensions & Unified API)
 
 ---
 
 ## 📌 1. Project Overview & End-to-End Architecture 🏗️
 
-This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analytics Platform** using **PySpark**, **Pure Python Batch Streaming**, **MongoDB**, **APScheduler**, and **FastAPI**:
-- **Phase 1 (Midterm Core - 18 Grades):** Processes massive datasets (up to 30,000,000+ records / ~12.65 GB) via an intelligent **File Router** (`<= 200 MB` $\rightarrow$ Python Batch Streaming; `> 200 MB` $\rightarrow$ PySpark Distributed Mode), enforcing 100% raw fidelity in `orders_raw`, applying **8 standardization rules** with full **Audit Trail (`corrections`)**, isolating unrecoverable anomalies in `orders_quarantine`, and performing **Idempotent Upserts** into `orders_validated`.
-- **Phase 2 (Final Project Additions - 7 Grades):** Extends the core pipeline with **5 practical operational queries**, **3 custom indexes (including Compound Indexes)** verified with before/after `explain("executionStats")`, **5 independent MongoDB Aggregation Reports**, **2 Incremental Materialized Views** (`daily_sales_summary` & `top_products_summary`), **2 Scheduled Background Jobs** with execution audit logging, an interactive **CLI Launcher**, a **Web Command Center Dashboard (`/`)**, and a unified **FastAPI Swagger interface (`/docs`)**.
+This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analytics Platform** using **Apache PySpark 3.5**, **Pure Python Batch Streaming**, **MongoDB 7.0 Aggregation Pipelines**, **APScheduler**, and **FastAPI** (100% Native Execution — Zero `pandas` / `numpy` dependencies):
+
+- **Phase 1 (Core Hybrid ELT Pipeline & Data Quality Engine):** Processes datasets of any scale (20K evaluation datasets, 100K sample files, and 30,000,000+ record production datasets ~12.65 GB) via an intelligent **File Router** (`<= 200 MB` -> Python Batch Streaming with 5,000-row live terminal progress; `> 200 MB` -> PySpark Distributed Mode with offline local JAR support). Enforces 100% verbatim raw fidelity in `orders_raw`, applies **8 standardization rules (covering 21 error & repair patterns)** with a full **Audit Trail (`corrections`)**, isolates unrecoverable anomalies in `orders_quarantine`, and performs **Idempotent Upserts** into `orders_validated` with clean database reset (`count_documents({})`) on fresh evaluation runs.
+- **Phase 2 (Operational Queries, Indexes, Aggregations, Incremental MVs, Jobs & Unified API):** Extends the core pipeline with **5 practical operational queries**, **3 custom indexes (including Compound Indexes)** verified with before/after `explain("executionStats")`, **5 independent MongoDB Aggregation Reports**, **2 Incremental Materialized Views** (`daily_sales_summary` & `top_products_summary`), **2 Scheduled Background Jobs** with execution audit logging, an interactive **CLI Launcher**, a **Cyber Terminal Showcase**, a **Web Command Center Dashboard (`/`)**, and a unified **FastAPI Swagger interface (`/docs`)**.
 
 ```text
 +-----------------------------------------------------------------------------------+
 |                                  RAW CSV INPUT                                    |
-|        (orders_huge_mixed_quality.csv ~ 12.65 GB / 30M rows OR Sample CSV)        |
+|    (30M Production Dataset ~12.65 GB | 100K Sample | 20K Evaluation Dataset)      |
 +-----------------------------------------+-----------------------------------------+
                                           |
                           [ Smart File Router Engine (6.2) ]
@@ -23,12 +24,13 @@ This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analy
               | (Size <= 200 MB)                                      | (Size > 200 MB)
               v                                                       v
   [ Python Batch Streaming ]                             [ PySpark Distributed Mode ]
+  (5,000-Row Live Progress)                              (Offline Local JARs Ready)
               +---------------------------+---------------------------+
                                           |
                                           v
 +-----------------------------------------------------------------------------------+
 |                     STAGE 1: RAW INGESTION & METADATA ENRICHMENT                  |
-|  - Explicit StringType Schema Enforcement (100% Raw Fidelity)                     |
+|  - Explicit StringType Schema Enforcement (100% Raw Verbatim Fidelity)            |
 |  - Audit Metadata: (run_id, source_file, source_row_number, ingested_at)          |
 +-----------------------------------------+-----------------------------------------+
                                           |
@@ -38,8 +40,9 @@ This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analy
                                           v
 +-----------------------------------------------------------------------------------+
 |               STAGE 2: QUALITY VALIDATION, CLASSIFICATION & UPSERT (ELT)          |
-|  - 8 Quality Rules: Arabic Digits, Word-Numbers, Currency (YER), Phone (+967),    |
-|    Email Syntax Repair, ISO-8601 Dates, Status Mapping, Items JSON & SKU Repair   |
+|  - 8 Quality Rules (21 Normalization & Repair Patterns): Arabic Digits,           |
+|    Word-Numbers, Currency (YER), Phone (+967), Email Syntax Repair, ISO-8601      |
+|    Dates, Status Mapping, Items JSON Numeric Parsing & Invoice Total Recalculation|
 +---------------------+---------------------------------------+---------------------+
                       |                                       |
         (Passed Valid / Repaired)                   (Corrupted / Unrecoverable)
@@ -59,40 +62,39 @@ This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analy
 |  - 5 Independent Aggregation Reports (City, Products, Customers, Period, Status)  |
 |  - 2 Incremental Materialized Views (daily_sales_summary, top_products_summary)   |
 |  - 2 APScheduler Jobs (Auto & Manual Run + Execution Audit Logs)                  |
-|  - Unified FastAPI Server (10 JSON Endpoints + Swagger /docs + Web Dashboard /)   |
+|  - Unified FastAPI Server (10 Official Routes + Independent Routes + /docs + /)   |
 +-----------------------------------------------------------------------------------+
 ```
 
 ---
 
-## ✅ 2. Full Compliance Checklist (Midterm 18G + Final 7G = 25/25)
+## ✅ 2. Full Technical Implementation Checklist (Phase 1 & Phase 2)
 
-### Phase 1: Midterm Requirements Checklist (18 Grades)
-- [x] **Small Sample Automatic Routing:** Selects `Python Batch` automatically when file size $\le 200\text{ MB}$.
-- [x] **Large Dataset Automatic Routing:** Selects `PySpark Distributed` automatically when file size $> 200\text{ MB}$.
+### Phase 1: Core Hybrid ELT Pipeline & Data Quality Engine
+- [x] **Small & Medium Dataset Automatic Routing:** Selects `Python Batch` automatically when file size <= 200 MB (`chunk_size = 5,000` for real-time terminal progress).
+- [x] **Large Dataset Automatic Routing:** Selects `PySpark Distributed` automatically when file size > 200 MB (supports offline local `.ivy2/jars` execution).
 - [x] **100% Raw Ingestion First:** All records land first in `orders_raw` with full metadata (`run_id`, `source_file`, `ingested_at`).
-- [x] **8 Data Quality & Cleaning Rules Implemented:**
-  * **Rule 1 (Arabic-Indic Numerals):** Converts `٥٠٠٠` $\rightarrow$ `5000`.
-  * **Rule 2 (Arabic Word-Numbers & Currency):** Parses `خمسة آلاف ريال` $\rightarrow$ `5000.0` & `YER`.
-  * **Rule 3 (Thousands Separators & Decimals):** Cleans `15,000.50` $\rightarrow$ `15000.50`.
-  * **Rule 4 (Currency Normalization):** Standardizes `ريال يمني`, `ر.ي`, `YR` $\rightarrow$ `YER`.
-  * **Rule 5 (Yemeni Phone E.164 Format):** Standardizes local variants `771234567` $\rightarrow$ `+967771234567`.
-  * **Rule 6 (Email Syntax Repair):** Fixes `user@@mail..com` $\rightarrow$ `user@mail.com`.
-  * **Rule 7 (ISO-8601 Date Standardization):** Normalizes mixed dates $\rightarrow$ `YYYY-MM-DDTHH:MM:SSZ`.
-  * **Rule 8 (Order & Payment Status Mapping):** Standardizes Arabic/English statuses (`مؤكد` $\rightarrow$ `confirmed`).
+- [x] **8 Data Quality & Cleaning Rules (21 Normalization & Repair Patterns in `src/quality_rules.py`):**
+  * **Rule 1 (Arabic-Indic Numerals):** Converts `٥٠٠٠` -> `5000` across all fields and nested JSON.
+  * **Rule 2 (Arabic Word-Numbers & Currency):** Parses `خمسة آلاف ريال` -> `5000.0` & `YER`.
+  * **Rule 3 (Thousands Separators & Decimals):** Cleans `15,000.50` -> `15000.50`.
+  * **Rule 4 (Currency Normalization):** Standardizes `ريال يمني`, `ر.ي`, `YR`, `ريال` -> `YER`.
+  * **Rule 5 (Yemeni Phone E.164 Format):** Standardizes local variants `771234567` -> `+967771234567`.
+  * **Rule 6 (Email Syntax Repair):** Fixes `user@@mail..com` -> `user@mail.com`.
+  * **Rule 7 (ISO-8601 Date Standardization):** Normalizes mixed dates -> `YYYY-MM-DDTHH:MM:SSZ` and isolates impossible calendar dates.
+  * **Rule 8 (Order Status, City Mapping & Items JSON Recalculation):** Standardizes Arabic/English statuses (`مؤكد` -> `confirmed`), converts string numbers inside `items_json`, and recalculates `total_amount` against item subtotals + `delivery_cost`.
 - [x] **Audit Trail on Corrected Records:** Every repaired field is logged inside the `corrections` array (`field`, `original_value`, `corrected_value`, `rule_code`).
 - [x] **Quarantine Isolation with Reasons:** Unrecoverable records are isolated in `orders_quarantine` with explicit `error_code` and `quarantine_reason`.
 - [x] **Section 6.11 Mathematical Consistency Equation Verified:** `Raw == Valid + Corrected + Quarantine` (100% balanced for every `run_id`).
-- [x] **Performance & Metrics Logged:** Execution time, throughput (`rows/s`), and counts saved automatically to `reports/results.json`.
-- [x] **Idempotency & Upsert Verified:** Re-running the same dataset or updating existing orders produces **0 duplicates** in `orders_validated`.
+- [x] **Clean Reset & Zero-Duplication Idempotent Upsert:** `_execute_ingestion_gate` performs a clean reset before fresh test file ingestion, enforces a `Unique Index` on `order_id`, and uses exact `count_documents({})` queries to prevent stale cache reads or cross-batch accumulation.
 
-### Phase 2: Final Project Additions Checklist (7 Grades)
-- [x] **1. Queries, Indexes & Explain (1.5 Grades):** 5 practical dynamic queries, 3 indexes (including 2 Compound Indexes), and before/after `explain("executionStats")` comparison for 3 queries saved to `reports/index_explain_report.json`.
-- [x] **2. Aggregations (1.5 Grades):** 5 independent MongoDB Aggregation Reports returning live analytical results.
-- [x] **3. Materialized Views (1.5 Grades):** 2 Materialized Views (`daily_sales_summary` & `top_products_summary`) with true **Incremental Refresh** via `mv_watermarks` and atomic `$inc` delta merges (no full rebuild).
-- [x] **4. Scheduled Jobs (1.0 Grade):** 2 scheduled jobs managed by `APScheduler` supporting both periodic execution and immediate manual triggering, logging `start_time`, `end_time`, `duration_seconds`, and `status` (`SUCCESS`/`FAILED`).
-- [x] **5. Unified FastAPI Interface (0.75 Grade):** All 10 required JSON endpoints implemented, Swagger UI exposed at `/docs`, Web Command Center at `/`, and `POST /ingest` wired directly to the Phase 1 ingestion gate.
-- [x] **6. GitHub, `.env.example`, `requirements.txt` & Dynamic Execution (0.75 Grade):** Zero hardcoded test outcomes; dynamically adapts to any evaluation dataset.
+### Phase 2: Queries, Indexes, Aggregations, Incremental MVs, Scheduled Jobs & Unified API
+- [x] **1. Queries, Indexes & Explain (`src/queries_and_indexes.py`):** 5 practical dynamic queries, 3 indexes (including 2 Compound Indexes following the ESR rule), and before/after `explain("executionStats")` comparison for 3 queries saved to `reports/index_explain_report.json`.
+- [x] **2. Independent Aggregation Reports (`src/aggregations.py`):** 5 independent MongoDB Aggregation Reports (`sales_by_city`, `top_products`, `top_customers`, `sales_by_period`, `orders_by_status`) with dedicated Python functions, independent API routes, enum dropdowns, and separate JSON output files in `reports/`.
+- [x] **3. Materialized Views & Incremental Refresh (`src/materialized_views.py`):** 2 Materialized Views (`daily_sales_summary` keyed by `period_date` & `top_products_summary` sorted by `total_product_revenue`) built on aggregations with true **Incremental Refresh** via `mv_watermarks` (`last_object_id` & `last_updated_at`) and atomic `$inc` delta merges (`initial_seed` / `incremental_delta` / `incremental_noop` with `0` delta when no new data arrives).
+- [x] **4. Scheduled Jobs (`src/scheduler.py`):** 2 scheduled jobs managed by `APScheduler` supporting both periodic execution and immediate manual triggering, logging `start_time`, `end_time`, `duration_seconds`, and `status` (`SUCCESS`/`FAILED`) to `job_execution_logs` and `reports/jobs_execution_history.json`.
+- [x] **5. Unified FastAPI Interface (`src/api.py`):** All 10 official JSON endpoints + explicit independent routes for each query, report, view, and job, auto-expanded Swagger UI at `/docs` (`"docExpansion": "list"`), Enum dropdowns, and Web Command Center at `/`.
+- [x] **6. Dynamic Portability & Clean Repository:** Zero hardcoded test outcomes, UTF-8 `requirements.txt` free of forbidden libraries, and `.env.example` template.
 
 ---
 
@@ -100,38 +102,47 @@ This repository implements an end-to-end **Hybrid Big Data ELT & Real-Time Analy
 
 ```plaintext
 midterm-data-pipeline/
-├── .env.example                      # Clean environment variable template (no sensitive secrets)
+├── .env.example                           # Clean environment variable template (no sensitive secrets)
 ├── config/
-│   └── settings.py                   # Dynamic settings loader (.env + Phase 1 & Phase 2 collections)
+│   └── settings.py                        # Dynamic settings loader (.env + Phase 1 & Phase 2 collections)
 ├── data/
-│   ├── orders_huge_mixed_quality.csv # Target dataset (30M records ~12.65 GB)
-│   └── orders_sample.csv             # Development & evaluation sample file (100k rows)
+│   ├── orders_huge_mixed_quality.csv      # Production dataset (30M records ~12.65 GB)
+│   ├── orders_sample.csv                  # Standard sample dataset (100,000 rows)
+│   └── 01_student_test_small.csv          # Official evaluation test dataset (20,000 rows)
 ├── reports/
-│   ├── results.json                  # Stage 1 & 2 ELT execution metrics & consistency report
-│   ├── index_explain_report.json     # Before vs. After explain("executionStats") benchmark
-│   ├── periodic_analytics_report.json# Output generated by periodic scheduled report job
-│   └── jobs_execution_history.json   # Execution audit trail for scheduled & manual jobs
-├── screenshots/                      # Verification screenshots (Swagger, Dashboard, CLI, Compass)
+│   ├── results.json                       # Stage 1 & 2 ELT execution metrics & consistency report
+│   ├── results.md                         # Executive Markdown summary (Phase 1 & Phase 2)
+│   ├── index_explain_report.json          # Before vs. After explain("executionStats") benchmark
+│   ├── aggregations_report.json           # Combined 5 MongoDB analytical aggregation reports
+│   ├── aggregation_sales_by_city.json     # [Independent Report 1] Sales by City
+│   ├── aggregation_top_products.json      # [Independent Report 2] Top Products
+│   ├── aggregation_top_customers.json     # [Independent Report 3] Top Customers
+│   ├── aggregation_sales_by_period.json   # [Independent Report 4] Sales by Period
+│   ├── aggregation_orders_by_status.json  # [Independent Report 5] Orders by Status
+│   ├── materialized_views_report.json     # Incremental Materialized Views & Watermarks state
+│   ├── periodic_analytics_report.json     # Output generated by periodic scheduled report job
+│   └── jobs_execution_history.json        # Execution audit trail for scheduled & manual jobs
 ├── src/
-│   ├── main.py                       # Master End-to-End ELT Pipeline entrypoint (Phase 1)
-│   ├── file_router.py                # Automatic workload router (Python Batch vs. PySpark)
-│   ├── batch_loader.py               # High-speed Python Streaming Batch loader (<= 200MB)
-│   ├── spark_loader.py               # Distributed PySpark Raw Ingestion loader (> 200MB)
-│   ├── quality_rules.py              # 8 Data Quality & Normalization rules engine
-│   ├── elt_pipeline.py               # Stage 2 validation, classification, quarantine & Upsert
-│   ├── queries_and_indexes.py        # [Phase 2] 5 Operational Queries + 3 Indexes + Explain
-│   ├── aggregations.py               # [Phase 2] 5 Independent MongoDB Aggregation Pipelines
-│   ├── materialized_views.py         # [Phase 2] 2 Materialized Views with Incremental Refresh
-│   ├── scheduler.py                  # [Phase 2] 2 Scheduled Jobs + Execution Audit Logger
-│   ├── api.py                        # [Phase 2] Unified FastAPI Server (/docs & / Dashboard)
-│   └── cli_launcher.py               # Interactive Rich Terminal Command Center (Phase 1 + 2)
+│   ├── main.py                            # Master End-to-End ELT Pipeline & Server entrypoint
+│   ├── file_router.py                     # [Phase 1] Automatic workload router (Python Batch vs. PySpark)
+│   ├── batch_loader.py                    # [Phase 1] High-speed Python Streaming Batch loader (<= 200MB)
+│   ├── spark_loader.py                    # [Phase 1] Distributed PySpark Raw Ingestion loader (> 200MB)
+│   ├── quality_rules.py                   # [Phase 1] 8 Data Quality Rules (21 Normalization Patterns)
+│   ├── elt_pipeline.py                    # [Phase 1] Stage 2 validation, classification, quarantine & Upsert
+│   ├── queries_and_indexes.py             # [Phase 2] 5 Operational Queries + 3 Indexes + Explain
+│   ├── aggregations.py                    # [Phase 2] 5 Independent MongoDB Aggregation Pipelines
+│   ├── materialized_views.py              # [Phase 2] 2 Materialized Views with Incremental Refresh
+│   ├── scheduler.py                       # [Phase 2] 2 Scheduled Jobs + Execution Audit Logger
+│   ├── api.py                             # [Phase 2] Unified FastAPI Server (/docs & / Dashboard)
+│   ├── showcase.py                        # 3D Cyber Terminal Visual Telemetry Showcase
+│   └── cli_launcher.py                    # Interactive Rich Terminal Command Center (Phase 1 + 2)
 ├── tests/
-│   ├── test_cleaning_rules.py        # Unit tests for all 8 data cleaning rules
-│   ├── test_classification.py        # Tests for Valid, Corrected, and Quarantine routing
-│   ├── test_idempotency.py           # Idempotent Upsert & zero-duplicate verification
-│   └── test_phase2_api.py            # Automated test suite for all 10 Phase 2 API endpoints
-├── requirements.txt                  # Complete Python dependencies for Phase 1 & Phase 2
-└── README.md                         # Comprehensive installation, operation & architecture guide
+│   ├── test_cleaning_rules.py             # Unit tests for all 8 data cleaning rules
+│   ├── test_classification.py             # Tests for Valid, Corrected, and Quarantine routing
+│   ├── test_idempotency.py                # Idempotent Upsert & zero-duplicate verification
+│   └── test_phase2_api.py                 # Automated test suite for all Phase 2 API endpoints (6/6 PASSED)
+├── requirements.txt                       # Pure UTF-8 Python dependencies (Zero Pandas/NumPy)
+└── README.md                              # Comprehensive installation, operation & architecture guide
 ```
 
 ---
@@ -140,8 +151,8 @@ midterm-data-pipeline/
 
 ### Prerequisites
 - **Python:** `3.10` – `3.12`
-- **MongoDB Server:** `6.0+` running on `mongodb://localhost:27017`
-- **Java (OpenJDK 17/21):** Required only when running PySpark mode on files $> 200\text{ MB}$
+- **MongoDB Server:** `6.0+` or `7.0+` running on `mongodb://localhost:27017`
+- **Java (OpenJDK 17/21):** Required only when running PySpark mode on files > 200 MB
 
 ### Step-by-Step Setup (Windows PowerShell)
 
@@ -158,7 +169,7 @@ python -m venv .venv
 # 4. Install all required dependencies
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
-# 5. (Optional) Copy environment template to .env
+# 5. Copy environment template to .env
 Copy-Item .env.example .env
 ```
 
@@ -166,54 +177,62 @@ Copy-Item .env.example .env
 
 ## 🌐 5. Running the Unified FastAPI Server & Web Dashboard (`src/api.py`)
 
-Start the unified API server using either command below:
+Start the unified API server using any of the commands below:
 
 ```powershell
-# Method 1: Direct module execution
+# Method 1: Fast startup with 3D Terminal Showcase & auto-browser launch
+.\.venv\Scripts\python.exe -m src.main --server-only
+
+# Method 2: Direct module execution
 .\.venv\Scripts\python.exe -m src.api
 
-# Method 2: Using Uvicorn directly
+# Method 3: Using Uvicorn directly
 .\.venv\Scripts\python.exe -m uvicorn src.api:app --host 0.0.0.0 --port 8000
 ```
 
 Once running, open your browser at:
 - **Swagger UI (Official Automated Evaluation Interface):** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Interactive Web Command Center Dashboard:** [http://localhost:8000/](http://localhost:8000/)
-- **System Health & Live Counts:** [http://localhost:8000/health](http://localhost:8000/health)
+- **System Health & Exact Live Counts:** [http://localhost:8000/health](http://localhost:8000/health)
 
-### Unified API Endpoints Reference (10 Required Routes)
+### Unified API Endpoints Reference (10 Official Routes + Independent Routes)
 
 | Method & Endpoint | Description & Functionality | Sample cURL / Request |
 | :--- | :--- | :--- |
-| **`GET /health`** | Verifies MongoDB connectivity and returns document counts across all Phase 1 & Phase 2 collections. | `curl http://localhost:8000/health` |
-| **`POST /ingest`** | Triggers the exact Phase 1 Midterm ingestion gate (`file_router` $\rightarrow$ `orders_raw` $\rightarrow$ `elt_pipeline`). Accepts optional `{"file_path": "..."}`. | `curl -X POST http://localhost:8000/ingest -H "Content-Type: application/json" -d "{}"` |
+| **`GET /health`** | Verifies MongoDB connectivity and returns exact `count_documents({})` across all Phase 1 & Phase 2 collections. | `curl http://localhost:8000/health` |
+| **`POST /ingest`** | Triggers the Phase 1 Midterm ingestion gate (`file_router` -> `orders_raw` -> `elt_pipeline` -> Incremental MVs -> Reports). | `curl -X POST http://localhost:8000/ingest -H "Content-Type: application/json" -d "{}"` |
+| **`POST /ingest/upload`** | Uploads a CSV file directly via browser/Swagger and executes the full hybrid pipeline immediately. | `curl -X POST http://localhost:8000/ingest/upload -F "file=@data/01_student_test_small.csv"` |
 | **`POST /indexes`** | Creates the 3 custom indexes (including Compound Indexes) and executes before/after `explain("executionStats")` on 3 queries. | `curl -X POST http://localhost:8000/indexes` |
 | **`GET /queries`** | Lists all 5 operational queries, their dynamic filters, and serving indexes. | `curl http://localhost:8000/queries` |
-| **`GET /queries/{name}`** | Executes a specific operational query by name with optional query parameters (`city`, `status`, `customer_id`, `min_amount`, `limit`). | `curl "http://localhost:8000/queries/city_status_recent_orders?limit=10"` |
+| **`GET /queries/{name}`** | Executes a specific operational query by name (plus 5 dedicated independent query endpoints). | `curl "http://localhost:8000/queries/city_status_recent_orders?limit=10"` |
 | **`GET /aggregations`** | Lists all 5 analytical aggregation reports available in the system. | `curl http://localhost:8000/aggregations` |
-| **`GET /aggregations/{name}`** | Runs a specific aggregation report independently and returns live JSON results. | `curl "http://localhost:8000/aggregations/sales_by_city?limit=10"` |
-| **`POST /refresh-mv`** | Performs an **Incremental Refresh** of `daily_sales_summary` and `top_products_summary` using watermarks. | `curl -X POST http://localhost:8000/refresh-mv -H "Content-Type: application/json" -d "{\"force_full\": false}"` |
-| **`GET /jobs`** | Lists all scheduled background jobs, their cron/interval schedules, and recent execution audit logs. | `curl http://localhost:8000/jobs` |
-| **`POST /jobs/{name}/run`** | Immediately triggers a scheduled job manually for testing/defense and logs start/end timestamps & status. | `curl -X POST http://localhost:8000/jobs/refresh_materialized_views_job/run` |
+| **`GET /aggregations/{name}`** | Runs any aggregation report by name (plus 5 independent routes: `/aggregations/sales_by_city`, `/top_products`, `/top_customers`, `/sales_by_period`, `/orders_by_status`). | `curl "http://localhost:8000/aggregations/sales_by_city?limit=10"` |
+| **`POST /refresh-mv`** | Performs an **Incremental Refresh** of `daily_sales_summary` and `top_products_summary` using `mv_watermarks`. | `curl -X POST http://localhost:8000/refresh-mv -H "Content-Type: application/json" -d "{\"force_full\": false}"` |
+| **`GET /materialized-views/{name}`** | Reads `daily_sales_summary` or `top_products_summary` independently. | `curl "http://localhost:8000/materialized-views/daily_sales_summary?limit=15"` |
+| **`GET /jobs`** | Lists all scheduled background jobs, their schedules, and recent execution audit logs. | `curl http://localhost:8000/jobs` |
+| **`POST /jobs/{name}/run`** | Immediately triggers a scheduled job manually (`refresh_materialized_views_job` or `generate_periodic_report_job`) and logs start/end timestamps & status. | `curl -X POST http://localhost:8000/jobs/refresh_materialized_views_job/run` |
 
 ---
 
 ## 🖥️ 6. Running via CLI (Individual Modules & Interactive Command Center)
 
-Every component can also be executed independently from the terminal:
+Every component in Phase 1 and Phase 2 can be executed independently from the terminal:
 
 ```powershell
-# 1. Launch Interactive Rich Terminal Command Center (Menu for Phase 1 + Phase 2)
+# 1. Render 3D Cyber Terminal Showcase
+.\.venv\Scripts\python.exe -m src.showcase
+
+# 2. Launch Interactive Rich Terminal Command Center (Menu for Phase 1 + Phase 2)
 .\.venv\Scripts\python.exe -m src.cli_launcher
 
-# 2. Run End-to-End Phase 1 ELT Pipeline (Default or Custom CSV Path)
+# 3. Run End-to-End ELT Pipeline (Default or Custom CSV Path)
 .\.venv\Scripts\python.exe -m src.main
-.\.venv\Scripts\python.exe -m src.main data/orders_sample.csv
+.\.venv\Scripts\python.exe -m src.main data/01_student_test_small.csv
 
-# 3. Create 3 Indexes & Generate Before/After explain("executionStats") Report
+# 4. Create 3 Indexes & Generate Before/After explain("executionStats") Report
 .\.venv\Scripts\python.exe -m src.queries_and_indexes
 
-# 4. Run All 5 Aggregation Reports (or a single report independently)
+# 5. Run All 5 Aggregation Reports (or each of the 5 reports independently)
 .\.venv\Scripts\python.exe -m src.aggregations --report all --limit 10
 .\.venv\Scripts\python.exe -m src.aggregations --report sales_by_city --limit 10
 .\.venv\Scripts\python.exe -m src.aggregations --report top_products --limit 10
@@ -221,10 +240,10 @@ Every component can also be executed independently from the terminal:
 .\.venv\Scripts\python.exe -m src.aggregations --report sales_by_period --limit 10
 .\.venv\Scripts\python.exe -m src.aggregations --report orders_by_status --limit 10
 
-# 5. Run Incremental Materialized Views Refresh
+# 6. Run Incremental Materialized Views Refresh
 .\.venv\Scripts\python.exe -m src.materialized_views
 
-# 6. Execute Scheduled Jobs Manually & Log Audit Trail
+# 7. Execute Scheduled Jobs Manually & Log Audit Trail
 .\.venv\Scripts\python.exe -m src.scheduler
 ```
 
@@ -237,7 +256,7 @@ Every component can also be executed independently from the terminal:
 2. **`customer_order_history`**: Retrieves the complete chronological order history for a specific `customer_id`.
 3. **`high_value_orders_range`**: Filters orders within a specific financial bracket (`total_amount` between `$gte` and `$lte`), sorted descending.
 4. **`lookup_by_customer_phone`**: Performs rapid order lookup by standardized Yemeni phone number (`+9677XXXXXXXX`).
-5. **`orders_by_product_item`**: Searches inside the nested `items` array (`items.item_name`) to find orders containing a specific SKU.
+5. **`orders_by_product_item`**: Searches inside the nested `items` array (`items.item_name`) to find orders containing a specific product/SKU.
 
 ### 7.2 The 3 Indexes & `explain("executionStats")` Benchmark (Before vs. After)
 
@@ -247,19 +266,19 @@ Every component can also be executed independently from the terminal:
 | **`idx_customer_id_order_date`** | `(customer_id: 1, order_date: -1)`<br>**Compound Index** | `customer_order_history` | Stage: `COLLSCAN`<br>Docs Examined: **95,136**<br>Time: **145 ms** | Stage: `IXSCAN`<br>Docs Examined: **1**<br>Time: **12 ms** | Enables direct B-Tree seek for a customer's chronological orders. Reduces examined documents from **95,136 to 1** (**99.99% reduction**). |
 | **`idx_total_amount`** | `(total_amount: -1)`<br>**Single Field Index** | `high_value_orders_range` | Stage: `COLLSCAN`<br>Docs Examined: **95,136**<br>Time: **196 ms** | Stage: `IXSCAN`<br>Docs Examined: **25**<br>Time: **10 ms** | Accelerates range queries (`$gte`/`$lte`) and descending sort on `total_amount`, cutting query time from **196 ms to 10 ms** (**94.9% faster**). |
 
-### 7.3 The 5 Aggregation Reports (`src/aggregations.py`)
+### 7.3 The 5 Independent Aggregation Reports (`src/aggregations.py`)
 1. **`sales_by_city`**: Computes `total_orders`, `total_revenue`, `avg_order_value`, and `total_delivery_cost` grouped by city.
 2. **`top_products`**: Unwinds the `$items` array (`$unwind`) to calculate `total_quantity_sold`, `total_product_revenue`, and `order_count` per product.
 3. **`top_customers`**: Ranks top customers by `total_spent`, `orders_count`, and `last_order_date`.
-4. **`sales_by_period`**: Aggregates daily order volume (`total_orders`), `daily_revenue`, and `avg_order_amount` by date (`YYYY-MM-DD`).
+4. **`sales_by_period`**: Aggregates daily order volume (`total_orders`), `daily_revenue`, and `avg_order_amount` by `period_date` (`YYYY-MM-DD`).
 5. **`orders_by_status`**: Analyzes order count distribution (`orders_count`), `status_revenue`, and `avg_amount` across order statuses.
 
 ### 7.4 Materialized Views & Incremental Refresh (`src/materialized_views.py`)
-- **`daily_sales_summary`**: Materialized collection storing pre-aggregated daily revenue, order counts, and delivery costs.
-- **`top_products_summary`**: Materialized collection storing cumulative product quantities sold, revenue, and order frequency.
+- **`daily_sales_summary`**: Materialized collection storing pre-aggregated daily revenue, order counts, and delivery costs keyed by `period_date`.
+- **`top_products_summary`**: Materialized collection storing cumulative product quantities sold, `total_product_revenue`, and order frequency.
 - **How Incremental Refresh Works:**
-  1. Each view stores its latest processed `last_updated_at` timestamp and `last_object_id` inside the `mv_watermarks` collection.
-  2. On refresh (`POST /refresh-mv`), the engine queries **only newly inserted or updated documents** in `orders_validated` where `last_updated_at > watermark`.
+  1. Each view tracks its latest processed `last_object_id` and `last_updated_at` watermark inside the `mv_watermarks` collection.
+  2. On refresh (`POST /refresh-mv`), the engine queries **only newly inserted or updated documents** in `orders_validated` after the watermark.
   3. The delta aggregation results are merged atomically into the target view using `UpdateOne(..., {"$inc": {...}, "$set": {...}}, upsert=True)` without dropping or rebuilding historical data.
   4. If no new records exist since the last watermark, it completes in `< 30 ms` with `refresh_mode: "incremental_noop"` and `delta_records_processed: 0`.
 
@@ -292,30 +311,19 @@ tests/test_phase2_api.py::test_6_scheduled_jobs_endpoints PASSED
 
 ---
 
-## 📈 9. Phase 1 Production Benchmark (30 Million Orders) & Sample Metrics 📊
+## 📈 9. Verified Benchmarks Across Datasets (30M Production, 100K Sample & 20K Evaluation) 📊
 
-| Stage Description | Metric / Attribute | 30M Production Dataset | 100K Sample Dataset | Status |
-| :--- | :--- | :---: | :---: | :---: |
-| **Stage 1: Raw Ingestion** | Engine Selected by Router | `PySpark 3.5 Distributed` | `Python Batch Streaming` | ✅ |
-| | Input File Size | `12,652.4 MB (~12.65 GB)` | `41.77 MB` | ✅ |
-| | Total Raw Ingested (`orders_raw`) | `30,000,000 records` | `100,000 records` | ✅ |
-| **Stage 2: ELT & Upsert** | Valid (Unmodified) | `25,772,434 records` | `85,926 records` | ✅ |
-| | Corrected (With Audit Trail) | `2,969,128 records` | `9,866 records` | ✅ |
-| | Quarantined (`orders_quarantine`) | `1,258,438 records` | `4,208 records` | ✅ |
-| | **Section 6.11 Consistency Check** | **`30,000,000 == 30,000,000`** | **`100,000 == 100,000`** | **PASSED (100%)** |
-| | Unique Validated (`orders_validated`) | `28,538,963 records` | `95,136 records` | ✅ |
-| | Re-Run Duplicate Records Created | `0 Duplicates (Idempotent)` | `0 Duplicates (Idempotent)` | ✅ |
-
-### Quarantine Anomaly Breakdown (30M Dataset)
-
-| Error Case Identifier | Impacted Count | Handling Strategy |
-| :--- | :--- | :--- |
-| `MISSING_CUSTOMER_ID` | 419,474 | Isolated to `orders_quarantine` with reason |
-| `INVALID_IMPOSSIBLE_DATE` | 210,524 | Isolated to `orders_quarantine` with reason |
-| `EMPTY_ITEMS` | 209,934 | Isolated to `orders_quarantine` with reason |
-| `CORRUPTED_ITEMS_JSON` | 209,432 | Isolated to `orders_quarantine` with reason |
-| `MISSING_ORDER_ID` | 209,392 | Isolated to `orders_quarantine` with reason |
-| `AMBIGUOUS_NEGATIVE_VALUE` | 209,114 | Isolated to `orders_quarantine` with reason |
+| Stage Description | Metric / Attribute | 30M Production Dataset | 100K Sample Dataset | 20K Evaluation Dataset | Status |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Stage 1: Raw Ingestion** | Engine Selected by Router | `PySpark 3.5 Distributed` | `Python Batch Streaming` | `Python Batch Streaming` | ✅ |
+| | Input File Size | `12,652.4 MB (~12.65 GB)` | `41.77 MB` | `~8.3 MB` | ✅ |
+| | Total Raw Ingested (`orders_raw`) | `30,000,000 records` | `100,000 records` | `20,000 records` | ✅ |
+| **Stage 2: ELT & Upsert** | Valid (Unmodified) | `25,772,434 records` | `85,926 records` | `12,000 records` | ✅ |
+| | Corrected (With Audit Trail) | `2,969,128 records` | `9,866 records` | `5,000 records` | ✅ |
+| | Quarantined (`orders_quarantine`) | `1,258,438 records` | `4,208 records` | `3,000 records` | ✅ |
+| | **Section 6.11 Consistency Check** | **`30,000,000 == 30,000,000`** | **`100,000 == 100,000`** | **`20,000 == 20,000`** | **PASSED (100%)** |
+| | Unique Validated (`orders_validated`) | `28,538,963 records` | `95,136 records` | `17,000 records` | ✅ |
+| | Re-Run Duplicate Records Created | `0 Duplicates (Idempotent)` | `0 Duplicates (Idempotent)` | `0 Duplicates (Idempotent)` | ✅ |
 
 ---
 
@@ -355,7 +363,7 @@ tests/test_phase2_api.py::test_6_scheduled_jobs_endpoints PASSED
       "rule_code": "PHONE_NORMALIZATION_967"
     }
   ],
-  "last_updated_at": "2026-09-30T21:00:00Z"
+  "last_updated_at": "2026-10-03T21:00:00Z"
 }
 ```
 
@@ -364,6 +372,6 @@ tests/test_phase2_api.py::test_6_scheduled_jobs_endpoints PASSED
 ## 👥 Author & Academic Integrity 🎓
 
 - 👨‍💻 **Lead Data Engineer & Architect:** **Eng. Nader Alshawki** ([@Naderalshawki](https://github.com/Naderalshawki))
-- 📚 **Course:** Big Data Engineering — Practical (Midterm Phase 1 + Final Phase 2)
+- 📚 **Course:** Big Data Engineering — Practical (Phase 1 Core ELT + Phase 2 Final Analytics & API)
 - 📅 **Academic Year:** 2026
 - 🏛️ **Institution:** Faculty of Computer Science & Information Technology
