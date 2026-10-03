@@ -208,6 +208,8 @@ Once running, open your browser at:
 | **`GET /aggregations`** | Lists all 5 analytical aggregation reports available in the system. | `curl http://localhost:8000/aggregations` |
 | **`GET /aggregations/{name}`** | Runs any aggregation report by name (plus 5 independent routes: `/aggregations/sales_by_city`, `/top_products`, `/top_customers`, `/sales_by_period`, `/orders_by_status`). | `curl "http://localhost:8000/aggregations/sales_by_city?limit=10"` |
 | **`POST /refresh-mv`** | Performs an **Incremental Refresh** of `daily_sales_summary` and `top_products_summary` using `mv_watermarks`. | `curl -X POST http://localhost:8000/refresh-mv -H "Content-Type: application/json" -d "{\"force_full\": false}"` |
+| **`POST /refresh-mv/daily_sales_summary`** | Independently refreshes `daily_sales_summary` incrementally via watermark delta. | `curl -X POST http://localhost:8000/refresh-mv/daily_sales_summary` |
+| **`POST /refresh-mv/top_products_summary`** | Independently refreshes `top_products_summary` incrementally via watermark delta. | `curl -X POST http://localhost:8000/refresh-mv/top_products_summary` |
 | **`GET /materialized-views/{name}`** | Reads `daily_sales_summary` or `top_products_summary` independently. | `curl "http://localhost:8000/materialized-views/daily_sales_summary?limit=15"` |
 | **`GET /jobs`** | Lists all scheduled background jobs, their schedules, and recent execution audit logs. | `curl http://localhost:8000/jobs` |
 | **`POST /jobs/{name}/run`** | Immediately triggers a scheduled job manually (`refresh_materialized_views_job` or `generate_periodic_report_job`) and logs start/end timestamps & status. | `curl -X POST http://localhost:8000/jobs/refresh_materialized_views_job/run` |
