@@ -34,13 +34,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest httpx fastapi uvicorn pymongo
+          pip install pytest httpx
 
-      - name: Prepare Environment and Dataset
+      - name: Prepare Environment and Test Dataset
         run: python tests/ci_setup.py
 
-      - name: Run Core ELT Pipeline Test
-        run: python -m src.main data/01_student_test_small.csv
-
-      - name: Run PyTest Grader Suite
+      - name: Run Unified PyTest Grader Suite (Phase 1 & Phase 2)
         run: python -m pytest tests/test_phase2_api.py -v -s
