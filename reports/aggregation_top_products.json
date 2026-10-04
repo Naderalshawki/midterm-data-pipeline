@@ -5,40 +5,40 @@
   "count_returned": 6,
   "results": [
     {
-      "total_quantity_sold": 58759,
-      "order_count": 29511,
+      "total_quantity_sold": 118509,
+      "order_count": 59372,
       "product_name": "هاتف سامسونج A54",
-      "total_product_revenue": 12925986500.0
+      "total_product_revenue": 26058779000.0
     },
     {
-      "total_quantity_sold": 59837,
-      "order_count": 29985,
+      "total_quantity_sold": 119334,
+      "order_count": 59701,
       "product_name": "قرص SSD محمول",
-      "total_product_revenue": 6570919000.0
+      "total_product_revenue": 13146682500.0
     },
     {
-      "total_quantity_sold": 60230,
-      "order_count": 30049,
+      "total_quantity_sold": 120416,
+      "order_count": 60076,
       "product_name": "سماعات رأس",
-      "total_product_revenue": 1721855500.0
+      "total_product_revenue": 3436255500.0
     },
     {
-      "total_quantity_sold": 59943,
-      "order_count": 29970,
+      "total_quantity_sold": 119762,
+      "order_count": 59855,
       "product_name": "محول HDMI",
-      "total_product_revenue": 600475000.0
+      "total_product_revenue": 1201359000.0
     },
     {
-      "total_quantity_sold": 59743,
-      "order_count": 29938,
+      "total_quantity_sold": 119814,
+      "order_count": 59854,
       "product_name": "فأرة لاسلكية",
-      "total_product_revenue": 535584000.0
+      "total_product_revenue": 1077040500.0
     },
     {
-      "total_quantity_sold": 59969,
-      "order_count": 29865,
+      "total_quantity_sold": 120022,
+      "order_count": 59834,
       "product_name": "شاحن سريع",
-      "total_product_revenue": 478679000.0
+      "total_product_revenue": 960240000.0
     }
   ]
 }

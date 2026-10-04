@@ -5,6 +5,22 @@
   "count_returned": 20,
   "results": [
     {
+      "customer_phone": "+967734563136",
+      "city": "صنعاء",
+      "orders_count": 1,
+      "last_order_date": "2025-01-29T09:31:00Z",
+      "customer_id": "عميل-107222",
+      "total_spent": 2129000.0
+    },
+    {
+      "customer_phone": "+967709253583",
+      "city": "حجة",
+      "orders_count": 1,
+      "last_order_date": "2025-01-02T10:49:00Z",
+      "customer_id": "عميل-121865",
+      "total_spent": 2010500.0
+    },
+    {
       "customer_phone": "+967709278778",
       "city": "حجة",
       "orders_count": 1,
@@ -21,6 +37,30 @@
       "total_spent": 1958500.0
     },
     {
+      "customer_phone": "+967706130831",
+      "city": "حجة",
+      "orders_count": 1,
+      "last_order_date": "2025-04-24T13:56:00Z",
+      "customer_id": "عميل-129431",
+      "total_spent": 1936500.0
+    },
+    {
+      "customer_phone": "+967730408659",
+      "city": "إب",
+      "orders_count": 1,
+      "last_order_date": "2025-04-27T09:46:00Z",
+      "customer_id": "عميل-155779",
+      "total_spent": 1910500.0
+    },
+    {
+      "customer_phone": "+967718606218",
+      "city": "عمران",
+      "orders_count": 1,
+      "last_order_date": "2025-04-21T14:17:00Z",
+      "customer_id": "عميل-117339",
+      "total_spent": 1904000.0
+    },
+    {
       "customer_phone": "+967737596900",
       "city": "صنعاء",
       "orders_count": 1,
@@ -29,12 +69,52 @@
       "total_spent": 1902500.0
     },
     {
+      "customer_phone": "+967732766710",
+      "city": "المكلا",
+      "orders_count": 1,
+      "last_order_date": "2025-03-03T12:27:00Z",
+      "customer_id": "عميل-158005",
+      "total_spent": 1899500.0
+    },
+    {
+      "customer_phone": "+967710202256",
+      "city": "عمران",
+      "orders_count": 1,
+      "last_order_date": "2025-03-03T02:30:00Z",
+      "customer_id": "عميل-167105",
+      "total_spent": 1878500.0
+    },
+    {
       "customer_phone": "+967700212666",
       "city": "تعز",
       "orders_count": 1,
       "last_order_date": "2025-01-29T12:26:00Z",
       "customer_id": "عميل-51776",
       "total_spent": 1853000.0
+    },
+    {
+      "customer_phone": "+967707843425",
+      "city": "حجة",
+      "orders_count": 1,
+      "last_order_date": "2025-01-29T22:33:00Z",
+      "customer_id": "عميل-145095",
+      "total_spent": 1852500.0
+    },
+    {
+      "customer_phone": "+967702624313",
+      "city": "حجة",
+      "orders_count": 1,
+      "last_order_date": "2025-03-21T04:04:00Z",
+      "customer_id": "عميل-186431",
+      "total_spent": 1831000.0
+    },
+    {
+      "customer_phone": "+967779452105",
+      "city": "المكلا",
+      "orders_count": 1,
+      "last_order_date": "2025-04-11T17:16:00Z",
+      "customer_id": "عميل-100452",
+      "total_spent": 1826000.0
     },
     {
       "customer_phone": "+967734477109",
@@ -53,6 +133,22 @@
       "total_spent": 1821500.0
     },
     {
+      "customer_phone": "+967716955963",
+      "city": "لحج",
+      "orders_count": 1,
+      "last_order_date": "2025-03-01T16:29:00Z",
+      "customer_id": "عميل-176237",
+      "total_spent": 1812000.0
+    },
+    {
+      "customer_phone": "+967713905719",
+      "city": "حجة",
+      "orders_count": 1,
+      "last_order_date": "2025-02-26T14:12:00Z",
+      "customer_id": "عميل-103620",
+      "total_spent": 1806500.0
+    },
+    {
       "customer_phone": "+967710560890",
       "city": "ذمار",
       "orders_count": 1,
@@ -61,108 +157,12 @@
       "total_spent": 1806000.0
     },
     {
-      "customer_phone": "+967704455396",
-      "city": "عدن",
-      "orders_count": 1,
-      "last_order_date": "2025-03-03T01:36:00Z",
-      "customer_id": "عميل-11730",
-      "total_spent": 1805500.0
-    },
-    {
-      "customer_phone": "+967735593352",
-      "city": "لحج",
-      "orders_count": 1,
-      "last_order_date": "2025-01-13T05:33:00Z",
-      "customer_id": "عميل-72654",
-      "total_spent": 1804000.0
-    },
-    {
-      "customer_phone": "+967710829363",
-      "city": "عمران",
-      "orders_count": 1,
-      "last_order_date": "2025-02-06T00:09:00Z",
-      "customer_id": "عميل-41167",
-      "total_spent": 1798000.0
-    },
-    {
-      "customer_phone": "+967779506903",
-      "city": "صنعاء",
-      "orders_count": 1,
-      "last_order_date": "2025-03-31T17:52:00Z",
-      "customer_id": "عميل-73639",
-      "total_spent": 1773500.0
-    },
-    {
-      "customer_phone": "+967731675653",
+      "customer_phone": "+967704840402",
       "city": "الحديدة",
       "orders_count": 1,
-      "last_order_date": "2025-01-04T01:56:00Z",
-      "customer_id": "عميل-62794",
-      "total_spent": 1762000.0
-    },
-    {
-      "customer_phone": "+967704770474",
-      "city": "الحديدة",
-      "orders_count": 1,
-      "last_order_date": "2025-01-24T20:16:00Z",
-      "customer_id": "عميل-10430",
-      "total_spent": 1759500.0
-    },
-    {
-      "customer_phone": "+967704151560",
-      "city": "إب",
-      "orders_count": 1,
-      "last_order_date": "2025-02-05T08:07:00Z",
-      "customer_id": "عميل-96727",
-      "total_spent": 1759500.0
-    },
-    {
-      "customer_phone": "+967777974991",
-      "city": "صنعاء",
-      "orders_count": 1,
-      "last_order_date": "2025-01-24T18:11:00Z",
-      "customer_id": "عميل-49330",
-      "total_spent": 1750500.0
-    },
-    {
-      "customer_phone": "+967779369365",
-      "city": "تعز",
-      "orders_count": 1,
-      "last_order_date": "2025-02-01T13:14:00Z",
-      "customer_id": "عميل-2048",
-      "total_spent": 1749000.0
-    },
-    {
-      "customer_phone": "+967714454346",
-      "city": "المكلا",
-      "orders_count": 1,
-      "last_order_date": "2025-01-08T21:16:00Z",
-      "customer_id": "عميل-27485",
-      "total_spent": 1739000.0
-    },
-    {
-      "customer_phone": "+967778546188",
-      "city": "تعز",
-      "orders_count": 1,
-      "last_order_date": "2025-04-05T20:28:00Z",
-      "customer_id": "عميل-86761",
-      "total_spent": 1726000.0
-    },
-    {
-      "customer_phone": "+967715635267",
-      "city": "حجة",
-      "orders_count": 1,
-      "last_order_date": "2025-04-06T09:34:00Z",
-      "customer_id": "عميل-15731",
-      "total_spent": 1724000.0
-    },
-    {
-      "customer_phone": "+967735468381",
-      "city": "إب",
-      "orders_count": 1,
-      "last_order_date": "2025-01-21T21:29:00Z",
-      "customer_id": "عميل-6467",
-      "total_spent": 1714000.0
+      "last_order_date": "2025-01-07T01:00:00Z",
+      "customer_id": "عميل-137979",
+      "total_spent": 1806000.0
     }
   ]
 }

@@ -5,74 +5,74 @@
   "count_returned": 10,
   "results": [
     {
-      "total_orders": 9018,
+      "total_orders": 17977,
       "city": "عدن",
-      "total_revenue": 2395558000.0,
-      "avg_order_value": 265641.83,
-      "total_delivery_cost": 31452000.0
+      "total_revenue": 4715889000.0,
+      "avg_order_value": 262329.03,
+      "total_delivery_cost": 62921000.0
     },
     {
-      "total_orders": 9085,
+      "total_orders": 18003,
       "city": "لحج",
-      "total_revenue": 2350156000.0,
-      "avg_order_value": 258685.31,
-      "total_delivery_cost": 31817000.0
+      "total_revenue": 4699957000.0,
+      "avg_order_value": 261065.21,
+      "total_delivery_cost": 63033000.0
     },
     {
-      "total_orders": 8939,
-      "city": "الحديدة",
-      "total_revenue": 2330192500.0,
-      "avg_order_value": 260677.09,
-      "total_delivery_cost": 31318000.0
-    },
-    {
-      "total_orders": 9110,
-      "city": "ذمار",
-      "total_revenue": 2319633500.0,
-      "avg_order_value": 254624.97,
-      "total_delivery_cost": 31897000.0
-    },
-    {
-      "total_orders": 8831,
-      "city": "إب",
-      "total_revenue": 2308733000.0,
-      "avg_order_value": 261435.06,
-      "total_delivery_cost": 31051000.0
-    },
-    {
-      "total_orders": 8863,
-      "city": "المكلا",
-      "total_revenue": 2305104000.0,
-      "avg_order_value": 260081.69,
-      "total_delivery_cost": 30911000.0
-    },
-    {
-      "total_orders": 9005,
-      "city": "تعز",
-      "total_revenue": 2297040000.0,
-      "avg_order_value": 255084.95,
-      "total_delivery_cost": 31609000.0
-    },
-    {
-      "total_orders": 8853,
-      "city": "عمران",
-      "total_revenue": 2288746000.0,
-      "avg_order_value": 258527.73,
-      "total_delivery_cost": 31035000.0
-    },
-    {
-      "total_orders": 8912,
-      "city": "حجة",
-      "total_revenue": 2280388000.0,
-      "avg_order_value": 255878.37,
-      "total_delivery_cost": 31273000.0
-    },
-    {
-      "total_orders": 8987,
+      "total_orders": 18171,
       "city": "صنعاء",
-      "total_revenue": 2271821000.0,
-      "avg_order_value": 252789.7,
-      "total_delivery_cost": 31510000.0
+      "total_revenue": 4674174500.0,
+      "avg_order_value": 257232.65,
+      "total_delivery_cost": 63726000.0
+    },
+    {
+      "total_orders": 18152,
+      "city": "ذمار",
+      "total_revenue": 4666973000.0,
+      "avg_order_value": 257105.17,
+      "total_delivery_cost": 63409000.0
+    },
+    {
+      "total_orders": 17763,
+      "city": "المكلا",
+      "total_revenue": 4656783000.0,
+      "avg_order_value": 262161.97,
+      "total_delivery_cost": 62052000.0
+    },
+    {
+      "total_orders": 18081,
+      "city": "حجة",
+      "total_revenue": 4649463000.0,
+      "avg_order_value": 257146.34,
+      "total_delivery_cost": 63255000.0
+    },
+    {
+      "total_orders": 17853,
+      "city": "تعز",
+      "total_revenue": 4632056000.0,
+      "avg_order_value": 259455.33,
+      "total_delivery_cost": 62541000.0
+    },
+    {
+      "total_orders": 17785,
+      "city": "عمران",
+      "total_revenue": 4608585000.0,
+      "avg_order_value": 259127.64,
+      "total_delivery_cost": 62396000.0
+    },
+    {
+      "total_orders": 17672,
+      "city": "إب",
+      "total_revenue": 4604905000.0,
+      "avg_order_value": 260576.34,
+      "total_delivery_cost": 61969000.0
+    },
+    {
+      "total_orders": 17897,
+      "city": "الحديدة",
+      "total_revenue": 4599613000.0,
+      "avg_order_value": 257004.69,
+      "total_delivery_cost": 62740000.0
     }
   ]
 }

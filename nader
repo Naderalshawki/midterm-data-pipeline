@@ -1,0 +1,2 @@
+.\.venv\Scripts\python.exe -m src.main --server-only
+Start-Process "https://github.com/Naderalshawki/midterm-data-pipeline/actions"
