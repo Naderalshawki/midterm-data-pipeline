@@ -5,40 +5,40 @@
   "count_returned": 6,
   "results": [
     {
-      "orders_count": 2962,
-      "status": "pending",
-      "status_revenue": 760852000.0,
-      "avg_amount": 256871.03
-    },
-    {
-      "orders_count": 2902,
-      "status": "shipped",
-      "status_revenue": 765342500.0,
-      "avg_amount": 263729.32
-    },
-    {
-      "orders_count": 2819,
+      "orders_count": 15066,
       "status": "cancelled",
-      "status_revenue": 722535500.0,
-      "avg_amount": 256309.15
+      "status_revenue": 3893684500.0,
+      "avg_amount": 258441.82
     },
     {
-      "orders_count": 2798,
+      "orders_count": 14991,
       "status": "confirmed",
-      "status_revenue": 734908000.0,
-      "avg_amount": 262654.75
+      "status_revenue": 3854787000.0,
+      "avg_amount": 257140.08
     },
     {
-      "orders_count": 2794,
-      "status": "delivered",
-      "status_revenue": 751223000.0,
-      "avg_amount": 268870.08
-    },
-    {
-      "orders_count": 2725,
+      "orders_count": 14982,
       "status": "returned",
-      "status_revenue": 737912000.0,
-      "avg_amount": 270793.39
+      "status_revenue": 3815278000.0,
+      "avg_amount": 254657.46
+    },
+    {
+      "orders_count": 14930,
+      "status": "pending",
+      "status_revenue": 3911017500.0,
+      "avg_amount": 261956.97
+    },
+    {
+      "orders_count": 14847,
+      "status": "shipped",
+      "status_revenue": 3844972000.0,
+      "avg_amount": 258972.99
+    },
+    {
+      "orders_count": 14787,
+      "status": "delivered",
+      "status_revenue": 3827633000.0,
+      "avg_amount": 258851.22
     }
   ]
 }

@@ -5,124 +5,124 @@
   "count_returned": 20,
   "results": [
     {
-      "total_orders": 29,
-      "period_date": "2026-06-30",
-      "daily_revenue": 8270500.0,
-      "avg_order_amount": 285189.66
+      "total_orders": 286,
+      "period_date": "2025-05-01",
+      "daily_revenue": 68874500.0,
+      "avg_order_amount": 240819.93
     },
     {
-      "total_orders": 89,
-      "period_date": "2026-06-29",
-      "daily_revenue": 23083000.0,
-      "avg_order_amount": 259359.55
+      "total_orders": 781,
+      "period_date": "2025-04-30",
+      "daily_revenue": 211767500.0,
+      "avg_order_amount": 271149.17
     },
     {
-      "total_orders": 81,
-      "period_date": "2026-06-28",
-      "daily_revenue": 20014500.0,
-      "avg_order_amount": 247092.59
+      "total_orders": 787,
+      "period_date": "2025-04-29",
+      "daily_revenue": 206768000.0,
+      "avg_order_amount": 262729.35
     },
     {
-      "total_orders": 117,
-      "period_date": "2026-06-27",
-      "daily_revenue": 30472000.0,
-      "avg_order_amount": 260444.44
+      "total_orders": 729,
+      "period_date": "2025-04-28",
+      "daily_revenue": 193392000.0,
+      "avg_order_amount": 265283.95
     },
     {
-      "total_orders": 94,
-      "period_date": "2026-06-26",
-      "daily_revenue": 22795500.0,
-      "avg_order_amount": 242505.32
+      "total_orders": 751,
+      "period_date": "2025-04-27",
+      "daily_revenue": 196054000.0,
+      "avg_order_amount": 261057.26
     },
     {
-      "total_orders": 79,
-      "period_date": "2026-06-25",
-      "daily_revenue": 19728000.0,
-      "avg_order_amount": 249721.52
+      "total_orders": 719,
+      "period_date": "2025-04-26",
+      "daily_revenue": 177855000.0,
+      "avg_order_amount": 247364.39
     },
     {
-      "total_orders": 105,
-      "period_date": "2026-06-24",
-      "daily_revenue": 27506000.0,
-      "avg_order_amount": 261961.9
+      "total_orders": 695,
+      "period_date": "2025-04-25",
+      "daily_revenue": 174784000.0,
+      "avg_order_amount": 251487.77
     },
     {
-      "total_orders": 97,
-      "period_date": "2026-06-23",
-      "daily_revenue": 29948500.0,
-      "avg_order_amount": 308747.42
+      "total_orders": 782,
+      "period_date": "2025-04-24",
+      "daily_revenue": 205235500.0,
+      "avg_order_amount": 262449.49
     },
     {
-      "total_orders": 93,
-      "period_date": "2026-06-22",
-      "daily_revenue": 24161500.0,
-      "avg_order_amount": 259801.08
+      "total_orders": 710,
+      "period_date": "2025-04-23",
+      "daily_revenue": 181320500.0,
+      "avg_order_amount": 255380.99
     },
     {
-      "total_orders": 101,
-      "period_date": "2026-06-21",
-      "daily_revenue": 30574500.0,
-      "avg_order_amount": 302717.82
+      "total_orders": 782,
+      "period_date": "2025-04-22",
+      "daily_revenue": 210781500.0,
+      "avg_order_amount": 269541.56
     },
     {
-      "total_orders": 103,
-      "period_date": "2026-06-20",
-      "daily_revenue": 28957000.0,
-      "avg_order_amount": 281135.92
+      "total_orders": 730,
+      "period_date": "2025-04-21",
+      "daily_revenue": 188204000.0,
+      "avg_order_amount": 257813.7
     },
     {
-      "total_orders": 89,
-      "period_date": "2026-06-19",
-      "daily_revenue": 22472500.0,
-      "avg_order_amount": 252500.0
+      "total_orders": 760,
+      "period_date": "2025-04-20",
+      "daily_revenue": 190900000.0,
+      "avg_order_amount": 251184.21
     },
     {
-      "total_orders": 102,
-      "period_date": "2026-06-18",
-      "daily_revenue": 25625000.0,
-      "avg_order_amount": 251225.49
+      "total_orders": 753,
+      "period_date": "2025-04-19",
+      "daily_revenue": 181702500.0,
+      "avg_order_amount": 241304.78
     },
     {
-      "total_orders": 91,
-      "period_date": "2026-06-17",
-      "daily_revenue": 17356000.0,
-      "avg_order_amount": 190725.27
+      "total_orders": 699,
+      "period_date": "2025-04-18",
+      "daily_revenue": 167992500.0,
+      "avg_order_amount": 240332.62
     },
     {
-      "total_orders": 91,
-      "period_date": "2026-06-16",
-      "daily_revenue": 21622500.0,
-      "avg_order_amount": 237609.89
+      "total_orders": 712,
+      "period_date": "2025-04-17",
+      "daily_revenue": 186214000.0,
+      "avg_order_amount": 261536.52
     },
     {
-      "total_orders": 101,
-      "period_date": "2026-06-15",
-      "daily_revenue": 24797000.0,
-      "avg_order_amount": 245514.85
+      "total_orders": 745,
+      "period_date": "2025-04-16",
+      "daily_revenue": 190535500.0,
+      "avg_order_amount": 255752.35
     },
     {
-      "total_orders": 104,
-      "period_date": "2026-06-14",
-      "daily_revenue": 23460000.0,
-      "avg_order_amount": 225576.92
+      "total_orders": 719,
+      "period_date": "2025-04-15",
+      "daily_revenue": 192957500.0,
+      "avg_order_amount": 268369.26
     },
     {
-      "total_orders": 87,
-      "period_date": "2026-06-13",
-      "daily_revenue": 24023000.0,
-      "avg_order_amount": 276126.44
+      "total_orders": 733,
+      "period_date": "2025-04-14",
+      "daily_revenue": 201968000.0,
+      "avg_order_amount": 275536.15
     },
     {
-      "total_orders": 85,
-      "period_date": "2026-06-12",
-      "daily_revenue": 22474000.0,
-      "avg_order_amount": 264400.0
+      "total_orders": 713,
+      "period_date": "2025-04-13",
+      "daily_revenue": 182389500.0,
+      "avg_order_amount": 255805.75
     },
     {
-      "total_orders": 84,
-      "period_date": "2026-06-11",
-      "daily_revenue": 22201500.0,
-      "avg_order_amount": 264303.57
+      "total_orders": 700,
+      "period_date": "2025-04-12",
+      "daily_revenue": 175890000.0,
+      "avg_order_amount": 251271.43
     }
   ]
 }

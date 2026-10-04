@@ -1,31 +1,31 @@
 # 📊 Comprehensive Pipeline Execution & Audit Report (Phase 1 & Phase 2)
 
-- **Generated At (UTC):** `2026-10-04T03:02:48.342205+00:00`
+- **Generated At (UTC):** `2026-10-04T15:48:55.075503+00:00`
 - **Database:** `hybrid_pipeline_db`
-- **Latest Run ID:** `5994826a-139e-482d-b9ba-14f8b032fa54`
+- **Latest Run ID:** `b13bc4f0-c876-4866-9b37-2f6b10aef193`
 
 ---
 
 ## 1. Phase 1: Raw Ingestion, Quality Validation & Upsert Metrics
 | Metric | Value |
 | :--- | :--- |
-| **Raw Input Records** | `20000` |
-| **Valid (Unmodified) Records** | `12000` |
-| **Corrected Records (With Audit Trail)** | `5000` |
-| **Quarantined Records (Isolated)** | `3000` |
+| **Raw Input Records** | `100000` |
+| **Valid (Unmodified) Records** | `68966` |
+| **Corrected Records (With Audit Trail)** | `21258` |
+| **Quarantined Records (Isolated)** | `9776` |
 | **Consistency Check (Section 6.11)** | `PASSED (Raw == Valid + Corrected + Quarantine)` |
-| **Idempotent Upsert - Inserted** | `17000` |
-| **Idempotent Upsert - Updated** | `0` |
-| **Elapsed Time (s)** | `7.255` |
-| **Throughput (rows/s)** | `2756.84` |
+| **Idempotent Upsert - Inserted** | `89603` |
+| **Idempotent Upsert - Updated** | `621` |
+| **Elapsed Time (s)** | `69.587` |
+| **Throughput (rows/s)** | `1437.05` |
 
 ---
 
 ## 2. Phase 2: Materialized Views & Incremental Refresh Status
 | Materialized View | Refresh Mode | Delta Records Processed | Total View Documents |
 | :--- | :---: | :---: | :---: |
-| **`daily_sales_summary`** | `initial_seed` | `17000` | `181` |
-| **`top_products_summary`** | `initial_seed` | `17000` | `6` |
+| **`daily_sales_summary`** | `initial_seed` | `89603` | `121` |
+| **`top_products_summary`** | `initial_seed` | `89603` | `6` |
 
 ---
 
