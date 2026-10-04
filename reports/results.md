@@ -1,8 +1,8 @@
 # 📊 Comprehensive Pipeline Execution & Audit Report (Phase 1 & Phase 2)
 
-- **Generated At (UTC):** `2026-10-03T22:14:37.063523+00:00`
+- **Generated At (UTC):** `2026-10-04T03:02:48.342205+00:00`
 - **Database:** `hybrid_pipeline_db`
-- **Latest Run ID:** `184c2b59-1390-4152-af90-e3ec63cc0c20`
+- **Latest Run ID:** `5994826a-139e-482d-b9ba-14f8b032fa54`
 
 ---
 
@@ -16,8 +16,8 @@
 | **Consistency Check (Section 6.11)** | `PASSED (Raw == Valid + Corrected + Quarantine)` |
 | **Idempotent Upsert - Inserted** | `17000` |
 | **Idempotent Upsert - Updated** | `0` |
-| **Elapsed Time (s)** | `22.897` |
-| **Throughput (rows/s)** | `873.49` |
+| **Elapsed Time (s)** | `7.255` |
+| **Throughput (rows/s)** | `2756.84` |
 
 ---
 
